@@ -1,15 +1,10 @@
-import { useRouteError } from "react-router-dom";
+import React from 'react'
+import Lazyload from '../../components/LazyLoad'
 
-export default function ErrorPage() {
-  const error = useRouteError();
+const ErrorPageLazy = React.lazy(() => import('./ErrorPage'))
 
-  return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-    </div>
-  );
+const ErrorPage = (props) => {
+  return <Lazyload component={ErrorPageLazy} animationLoading {...props} />
 }
+
+export default ErrorPage

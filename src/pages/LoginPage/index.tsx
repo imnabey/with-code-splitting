@@ -1,10 +1,10 @@
-import React from "react";
-import Lazyload from "../../components/LazyLoad";
+import React from 'react'
+import Lazyload from 'src/components/LazyLoad'
 
-const LoginLazy = React.lazy(() => import("./Login"));
+const LoginLazy = React.lazy(() => import('./Login'))
 
-const Login = props => {
-  return <Lazyload component={LoginLazy} animationLoading {...props} />;
-};
+const Login = (props) => {
+  return <Lazyload component={LoginLazy} animationLoading {...props} />
+}
 
-export default Login;
+export default Login

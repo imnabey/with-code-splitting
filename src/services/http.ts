@@ -31,65 +31,68 @@ axiosInstance.interceptors.response.use(
   res => {
     return res
   },
-  async function(err) {
+  async function (err) {
     return interceptorErrorHandling(err)
   },
 )
 
 const POST = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, data, headers } = value
+  // console.log()
+  const response = await axios.post(url, data, {
+    headers: headers,
+  })
+  return response.data
   // const token = utils.store.get('token') || ''
-  try {
-    const response = await axios.post(url, data, {
-      headers: headers,
-    })
-    return response.data
-  } catch (error) {
-    throw error
-  }
+  // try {
+
+  // } catch (error) {
+  //   throw error
+  // }
 }
 
 const PATCH = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, data, headers } = value
   // const token = utils.store.get('token') || ''
 
-  try {
-    const response = await axios.patch(url, data, {
-      headers: headers,
-    })
-    return response
-  } catch (error) {
-    throw error
-  }
+  // try {
+  //   const response = await axios.patch(url, data, {
+  //     headers: headers,
+  //   })
+  //   return response
+  // } catch (error) {
+  //   throw error
+  // }
 }
 
 const PUT = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, data, headers } = value
   // const token = utils.store.get('token') || ''
 
-  try {
-    const response = await axios.put(url, data, {
-      headers: headers,
-    })
-    return response
-  } catch (error) {
-    throw error
-  }
+  // try {
+  //   const response = await axios.put(url, data, {
+  //     headers: headers,
+  //   })
+  //   return response
+  // } catch (error) {
+  //   throw error
+  // }
 }
 
 const GET = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, headers, params } = value
   // const token = utils.store.get('token') || ''
 
-  try {
-    const response = await axios.get(url, {
-      headers: headers,
-      params,
-    })
-    return response.data
-  } catch (error) {
-    throw error
-  }
+  const response = await axios.get(url, {
+    headers: headers,
+    params,
+  })
+  return response.data
+  // try {
+
+  // } catch (error) {
+  //   // throw error
+  // }
 }
 
 export { POST, PATCH, PUT, GET }

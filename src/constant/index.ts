@@ -1,1 +1,1 @@
-export const END_POINT = 'https://biroperjalanan.datacakra.com/'
+export const END_POINT = 'https://biroperjalanan.datacakra.com'

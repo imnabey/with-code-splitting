@@ -1,18 +1,14 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState, AppThunk } from 'src/store'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { RootState } from 'src/store'
 import { getTouristListAPI } from 'src/services/api/touristAPI'
 
-// export interface TouristState {
-//   value: number
-//   status: 'idle' | 'loading' | 'failed'
-// }
+export interface TouristState {
+  error: null,
+  status: 'idle' | 'loading' | 'failed',
+  tourists: [],
+}
 
-// const initialState: TouristState = {
-//   value: 0,
-//   status: 'idle',
-// }
-
-const initialState = {
+const initialState: TouristState = {
   status: 'idle',
   error: null,
   tourists: [],
