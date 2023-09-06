@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
+import MainLayout from 'src/components/layout/MainLayout'
 
 const onFinishFailed = (errorInfo: any) => {
   console.log('Failed:', errorInfo)
@@ -29,7 +30,7 @@ const Login: React.FC = () => {
 
   console.log(user)
   return (
-    <>
+    <MainLayout>
       <h1 className='text-1xl'>Register</h1>
       <Form
         name='basic'
@@ -70,7 +71,7 @@ const Login: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </MainLayout>
   )
 }
 
