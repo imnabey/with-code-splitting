@@ -1,13 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { ConfigProvider } from 'antd'
+
 import HomePage from 'src/pages/HomePage'
 import Login from 'src/pages/LoginPage'
 import ErrorPage from 'src/pages/ErrorPage'
 import RegisterPage from 'src/pages/RegisterPage'
+import DetailPage from 'src/pages/DetailPage/DetailPage'
 
-// import viteLogo from '/vite.svg'
 import './App.css'
-// import Layout from "./components/Layout";
-// import { Button, Card } from "antd";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,9 +26,47 @@ function App() {
       element: <RegisterPage />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: '/detail',
+      element: <DetailPage />,
+      errorElement: <ErrorPage />,
+    },
   ])
 
-  return <RouterProvider router={router}></RouterProvider>
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Menu: {
+            colorBgContainer: 'transparent',
+            colorItemBgHover: 'red',
+            colorItemBgSelected: 'blue',
+            colorItemTextSelected: '#...',
+          },
+          Input: {
+            // colorPrimary: '#eb2f96',
+            // algorithm: true, // Enable algorithm
+          },
+          Button: {
+            colorPrimary: '#383B43',
+            colorSuccess: '#70A0AF',
+          },
+        },
+
+        token: {
+          // Seed Token
+          colorPrimary: '#383B43',
+
+          borderRadius: 2,
+
+          // Alias Token
+          colorBgContainer: 'white',
+        },
+      }}
+    >
+      <RouterProvider router={router}></RouterProvider>{' '}
+    </ConfigProvider>
+  )
 }
 
 export default App

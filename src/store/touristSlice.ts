@@ -17,7 +17,7 @@ const initialState: TouristState = {
 export const getTouristList = createAsyncThunk(
   'tourist/getList',
   async () => {
-    const response = await getTouristListAPI(1, 2)
+    const response = await getTouristListAPI(1, 3)
     return response.data
   },
 )

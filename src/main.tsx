@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { store } from 'src/store'
 
 import App from './App.tsx'
+
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
