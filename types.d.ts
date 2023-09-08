@@ -10,3 +10,8 @@ export interface ICard {
   // username: string,
   // onClick: () => void
 }
+export interface IPagination {
+  onChange: (page: number, pageSize: number) => void,
+  current: number,
+  totalData: number
+}

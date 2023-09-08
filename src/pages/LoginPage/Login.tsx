@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
 // import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { login, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import MainLayout from 'src/components/layout/MainLayout'
@@ -22,7 +22,7 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const isLoading = useSelector(selectLoading)
   const errorMessage = useSelector(selectErrorMessage)
   const user = useSelector(selectUser)
@@ -30,12 +30,11 @@ const Login: React.FC = () => {
   const onFinish = (values: { email: string; password: string }) => {
     dispatch(login({ email: values.email, password: values.password }))
     console.log('Success:', values)
-    // navigate('/', { replace: true })
   }
 
-  console.log(user)
+  // console.log(user)
 
-  if (user) {
+  if (user.name) {
     return <Navigate replace to='/' />
   }
 

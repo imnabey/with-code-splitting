@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { register, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import clsx from 'clsx'
@@ -26,11 +26,13 @@ const Login: React.FC = () => {
   const isLoading = useSelector(selectLoading)
   const errorMessage = useSelector(selectErrorMessage)
   const user = useSelector(selectUser)
+  const navigate = useNavigate()
 
   const onFinish = (values: { email: string; password: string; name: string }) => {
     dispatch(register({ email: values.email, password: values.password, name: values.name }))
     console.log('Success:', values)
     // return // navigate('/', { replace: true })
+    navigate('/login')
   }
   // console.log(user, 'user')
   // if (user) {

@@ -1,21 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store'
-import { loginAPI, registerAPI } from 'src/services/api/userAPI'
+import { loginAPI, registerAPI, logout, getUserAPI } from 'src/services/api/userAPI'
 
 const initialState = {
   isLoading: false,
   errorMessage: '',
-  currentUser: null,
+  currentUser: {
+    name: "",
+    email: "",
+    avatar: ""
+  },
 };
 
 export const login = createAsyncThunk(
   'user/login',
   async (data: { email: string, password: string }) => {
     const response = await loginAPI(data)
-    // console.log(response, "cekk");
 
     if (response.data.Token) {
       localStorage.setItem('token', response.data.Token);
+      localStorage.setItem('id', response.data.Id);
     }
 
     return response.data
@@ -29,6 +33,18 @@ export const register = createAsyncThunk(
     return response.data
   }
 );
+
+export const logouts = createAsyncThunk("user/logout", () => {
+  logout();
+});
+
+export const getUser = createAsyncThunk(
+  'user/getUser',
+  async (id: string) => {
+    const response = await getUserAPI(id)
+    return response
+  },
+)
 
 // Config slice
 export const userSlice = createSlice({
@@ -62,7 +78,24 @@ export const userSlice = createSlice({
     });
 
     // Request register successful
-    builder.addCase(register.fulfilled, (state, action) => {
+    builder.addCase(register.fulfilled, (state) => {
+      state.isLoading = false;
+      // state.isAuthenticated = true;
+      // state.currentUser = action.payload;
+    });
+
+    builder.addCase(logouts.fulfilled, (state) => {
+      state.isLoading = false;
+      // state.isAuthenticated = true;
+      state.currentUser = {
+        name: "",
+        email: "",
+        avatar: ""
+      };
+    });
+
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      console.log(action.payload, "action.payload")
       state.isLoading = false;
       // state.isAuthenticated = true;
       state.currentUser = action.payload;
@@ -77,7 +110,7 @@ export const userSlice = createSlice({
 });
 
 // Export actions
-export const { logout } = userSlice.actions;
+// export const { logout } = userSlice.actions;
 
 // Select state currentUser from slice
 export const selectUser = (state: RootState) => state.users.currentUser;

@@ -1,6 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getTouristList, touristList, touristStatus } from 'src/store/touristSlice'
+import { useLocation } from 'react-router-dom'
+import dayjs from 'dayjs'
+
+import {
+  getTouristList,
+  touristList,
+  touristStatus,
+  getTouristById,
+  touristId,
+} from 'src/store/touristSlice'
 import ProtectedLayout from 'src/components/layout/ProtectedLayout'
 import { AppDispatch } from 'src/store'
 import {
@@ -11,22 +20,48 @@ import {
 } from '@ant-design/icons'
 // import Card from 'src/components/Card'
 import { Button, Image } from 'antd'
+import ModalUpdateProfile from './components/ModalEditProfile'
+import ModalDeleteProfile from './components/ModalDeleteProfile'
+
 // import { Col, Row } from 'antd'
 // import Card from 'src/components/Card'
 
 export default function DetailPage() {
   const dispatch = useDispatch<AppDispatch>()
+  const location = useLocation()
   const touristListData = useSelector(touristList)
-  // const touristStatusData = useSelector(touristStatus)
+  const touristByIdData = useSelector(touristId)
+  const [open, setOpen] = useState(false)
+  const [openDelete, setOpenDelete] = useState(false)
+  const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+  console.log('pathname', detailId)
+  const touristStatusData = useSelector(touristStatus)
+
+  const initFetch = useCallback(() => {
+    dispatch(getTouristList(1))
+  }, [dispatch])
 
   useEffect(() => {
-    // if (touristStatusData === 'idle') {
-    dispatch(getTouristList())
+    initFetch()
+  }, [initFetch])
 
-    // }
+  useEffect(() => {
+    if (touristStatusData === 'idle') {
+      dispatch(getTouristById(detailId))
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  // console.log(touristListData, 'touristListData')
+
+  const showModal = () => {
+    setOpen(true)
+  }
+
+  const showModalDelete = () => {
+    setOpenDelete(true)
+  }
+  const joinDate = dayjs(touristByIdData.createdat)
+  const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
+  // console.log(touristByIdData, 'touristListData')
 
   return (
     <ProtectedLayout>
@@ -41,9 +76,7 @@ export default function DetailPage() {
           <div className='flex w-full mb-16'>
             <div className='w-[20%]'>
               <Image
-                src={
-                  'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/672.jpg'
-                }
+                src={touristByIdData.tourist_profilepicture}
                 className='rounded-full mb-10'
                 width={150}
                 height={150}
@@ -51,32 +84,39 @@ export default function DetailPage() {
             </div>
 
             <div className='text-left w-[70%]'>
-              <div className='text-3xl font-bold text-gray mb-2'>Nabilah Ayu Permata</div>
+              <div className='text-3xl font-bold text-gray mb-2'>
+                {touristByIdData.tourist_name}
+              </div>
               <div className='text-lg text-gray-medium '>
                 <StarOutlined className='mr-2' />
-                32-31242354-564839
+                {touristByIdData.id}
               </div>
               <div className='text-lg text-gray-medium flex items-center'>
                 <MailOutlined className='mr-2' />
-                nabilah@gmail.com
+                {touristByIdData.tourist_email}
               </div>
               <div className='text-lg text-gray-medium'>
                 <ClockCircleOutlined className='mr-2' />
-                22-Agustus-2023
+
+                {convertJoinDate}
               </div>
               <div className='text-lg text-gray-medium mb-4'>
                 <EnvironmentOutlined className='mr-2' />
-                Jakarta
+                {touristByIdData.tourist_location}
               </div>
               <div className='flex items-center'>
                 {' '}
                 <Button
                   type='primary'
+                  onClick={showModal}
                   className='px-10 py-5 flex items-center shadow-none mr-5 font-semibold rounded-3xl '
                 >
                   Edit Profile
                 </Button>
-                <Button className='px-10 py-5 flex items-center shadow-none mr-5 font-semibold rounded-3xl '>
+                <Button
+                  onClick={showModalDelete}
+                  className='px-10 py-5 flex items-center shadow-none mr-5 font-semibold rounded-3xl '
+                >
                   Delete Profile
                 </Button>
               </div>
@@ -132,6 +172,25 @@ export default function DetailPage() {
 
         {/* </Row> */}
       </div>
+
+      <ModalUpdateProfile
+        open={open}
+        setOpen={setOpen}
+        name={touristByIdData.tourist_name}
+        email={touristByIdData.tourist_email}
+        location={touristByIdData.tourist_location}
+        id={touristByIdData.id}
+        pic={touristByIdData.tourist_profilepicture}
+      />
+      <ModalDeleteProfile
+        open={openDelete}
+        setOpen={setOpenDelete}
+        name={touristByIdData.tourist_name}
+        email={touristByIdData.tourist_email}
+        location={touristByIdData.tourist_location}
+        id={touristByIdData.id}
+        pic={touristByIdData.tourist_profilepicture}
+      />
     </ProtectedLayout>
   )
 }

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getTouristList, touristList, touristStatus } from 'src/store/touristSlice'
+import { getTouristList, touristList, touristStatus, totalTourists } from 'src/store/touristSlice'
 import ProtectedLayout from 'src/components/layout/ProtectedLayout'
 import { AppDispatch } from 'src/store'
 // import { Col, Row } from 'antd'
@@ -8,26 +8,41 @@ import Card from 'src/components/Card'
 import Pagination from 'src/components/Pagination'
 import { Button } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
+import type { PaginationProps } from 'antd'
 import ModalAddProfile from './components/ModalAddProfile'
 
 export default function Homepage() {
   const dispatch = useDispatch<AppDispatch>()
   const touristListData = useSelector(touristList)
+  const totalTouristsData = useSelector(totalTourists)
   const [open, setOpen] = useState(false)
+  const [current, setCurrent] = useState(1)
   // const touristStatusData = useSelector(touristStatus)
 
-  useEffect(() => {
-    // if (touristStatusData === 'idle') {
-    dispatch(getTouristList())
+  const initFetch = useCallback(() => {
+    dispatch(getTouristList(current))
+  }, [dispatch, current])
 
-    // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  useEffect(() => {
+    initFetch()
+  }, [initFetch])
+
+  // useEffect(() => {
+  //   // if (touristStatusData === 'idle') {
+  //   dispatch(getTouristList())
+
+  //   // }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dispatch])
 
   const showModal = () => {
     setOpen(true)
   }
   console.log(touristListData, 'touristListData')
+
+  const onChange: PaginationProps['onChange'] = (page) => {
+    setCurrent(page)
+  }
 
   return (
     <ProtectedLayout>
@@ -53,7 +68,7 @@ export default function Homepage() {
             </Button>
           </div>
 
-          {touristListData.slice(0, 5).map((item: any, index: any) => (
+          {touristListData.map((item: any, index: any) => (
             // <Col className='gutter-row' span={8}>
             <Card
               key={index}
@@ -64,7 +79,7 @@ export default function Homepage() {
             />
             // </Col>
           ))}
-          <Pagination />
+          <Pagination onChange={onChange} current={current} totalData={totalTouristsData} />
         </div>
         <div className='w-[30%]'>
           <div className='h-[50vh] text-left px-20 py-14 mb-10 shadow-md bg-gray rounded-3xl'>
@@ -73,7 +88,7 @@ export default function Homepage() {
             </div>
             <div className='flex items-baseline mb-14'>
               {' '}
-              <div className='text-[#ffffff] text-7xl font-bold  mr-2'>2345</div>
+              <div className='text-[#ffffff] text-7xl font-bold  mr-2'> {totalTouristsData} </div>
               <div className='text-3xl text-[#ffffff] font-semibold'>people</div>
             </div>
 
@@ -106,7 +121,7 @@ export default function Homepage() {
 
       {/* </ul> */}
       {/* <div id="detail"></div> */}
-      <ModalAddProfile open={open} setOpen={setOpen} />
+      <ModalAddProfile open={open} setOpen={setOpen} setCurrent={setCurrent} />
     </ProtectedLayout>
   )
 }

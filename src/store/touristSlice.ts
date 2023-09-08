@@ -1,26 +1,82 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store'
-import { getTouristListAPI } from 'src/services/api/touristAPI'
+import { getTouristListAPI, getTouristByIdAPI, addTouristAPI, deleteTouristAPI, updateTouristAPI } from 'src/services/api/touristAPI'
 
-export interface TouristState {
+interface TouristState {
   error: null,
   status: 'idle' | 'loading' | 'failed',
-  tourists: [],
+  tourists: string[],
+  // touristId: {
+  //   tourist_profilepicture: string,
+  //   tourist_name: string
+  // },
+  totalTourists: number,
+  totalPage: number,
+  touristById: {
+    tourist_profilepicture: string,
+    tourist_name: string,
+    tourist_email: string,
+    createdat: string,
+    id: string,
+    tourist_location: string
+  }
 }
 
 const initialState: TouristState = {
   status: 'idle',
   error: null,
   tourists: [],
+  totalTourists: 0,
+  totalPage: 0,
+  touristById: {
+    tourist_profilepicture: '',
+    tourist_name: '',
+    tourist_email: "",
+    createdat: "",
+    id: "",
+    tourist_location: ""
+  },
 }
 
 export const getTouristList = createAsyncThunk(
   'tourist/getList',
-  async () => {
-    const response = await getTouristListAPI(1, 3)
-    return response.data
+  async (page: number) => {
+    const response = await getTouristListAPI(page)
+    return response
   },
 )
+
+export const getTouristById = createAsyncThunk(
+  'tourist/getTouristId',
+  async (id: string) => {
+    const response = await getTouristByIdAPI(id)
+    return response
+  },
+)
+
+export const addTouristList = createAsyncThunk(
+  'tourist/addList',
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string }) => {
+    const response = await addTouristAPI(data)
+    return response
+  }
+);
+
+export const deleteTourist = createAsyncThunk(
+  'tourist/deleteTourist',
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string }) => {
+    const response = await deleteTouristAPI(data)
+    return response
+  }
+);
+export const editTourist = createAsyncThunk(
+  'tourist/editTourist',
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string }) => {
+    const response = await updateTouristAPI(data)
+    return response
+  }
+);
+
 
 export const touristSlice = createSlice({
   name: 'tourist',
@@ -28,21 +84,44 @@ export const touristSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(getTouristById.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.touristById = action.payload
+      })
+      .addCase(deleteTourist.fulfilled, (state) => {
+        state.status = 'idle'
+        // state.tourists = action.payload
+      })
+      .addCase(editTourist.fulfilled, (state) => {
+        state.status = 'idle'
+        // state.tourists = action.payload
+      })
+      .addCase(addTouristList.fulfilled, (state) => {
+        // console.log([state.tourists.push(action.payload)],)
+        state.status = 'idle'
+        // state.tourists = [state.tourists.push(action.payload)] as 
+
+      })
       .addCase(getTouristList.pending, state => {
         state.status = 'loading'
       })
       .addCase(getTouristList.fulfilled, (state, action) => {
         state.status = 'idle'
-        state.tourists = action.payload
+        state.tourists = action.payload.data
+        state.totalTourists = action.payload.totalrecord
+        state.totalPage = action.payload.total_pages
       })
       .addCase(getTouristList.rejected, (state) => {
         state.status = 'failed'
         // state.error = action.error.message
       })
+
   },
 })
 
 export const touristList = (state: RootState) => state.tourists.tourists;
 export const touristStatus = (state: RootState) => state.tourists.status;
+export const totalTourists = (state: RootState) => state.tourists.totalTourists;
+export const touristId = (state: RootState) => state.tourists.touristById;
 
 export default touristSlice.reducer

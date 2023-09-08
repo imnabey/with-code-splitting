@@ -54,7 +54,10 @@ const POST = async (value: MethodValueTypes, options?: OptionsTypes) => {
 const PATCH = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, data, headers } = value
   // const token = utils.store.get('token') || ''
-
+  const response = await axios.patch(url, data, {
+    headers: headers,
+  })
+  return response.data
   // try {
   //   const response = await axios.patch(url, data, {
   //     headers: headers,
@@ -68,7 +71,27 @@ const PATCH = async (value: MethodValueTypes, options?: OptionsTypes) => {
 const PUT = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, data, headers } = value
   // const token = utils.store.get('token') || ''
+  const response = await axios.put(url, data, {
+    headers: headers,
+  })
+  return response.data
+  // try {
+  //   const response = await axios.put(url, data, {
+  //     headers: headers,
+  //   })
+  //   return response
+  // } catch (error) {
+  //   throw error
+  // }
+}
 
+const DELETE = async (value: MethodValueTypes, options?: OptionsTypes) => {
+  const { url, data, headers } = value
+  // const token = utils.store.get('token') || ''
+  const response = await axios.delete(url, {
+    headers: headers,
+  })
+  return response.data
   // try {
   //   const response = await axios.put(url, data, {
   //     headers: headers,
@@ -87,6 +110,8 @@ const GET = async (value: MethodValueTypes, options?: OptionsTypes) => {
     headers: headers,
     params,
   })
+
+  // console.log(response.data, "response.data")
   return response.data
   // try {
 
@@ -95,4 +120,4 @@ const GET = async (value: MethodValueTypes, options?: OptionsTypes) => {
   // }
 }
 
-export { POST, PATCH, PUT, GET }
+export { POST, PATCH, PUT, GET, DELETE }

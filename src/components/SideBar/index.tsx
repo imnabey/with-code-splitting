@@ -51,7 +51,7 @@ export const Sidebar: FC = () => {
       breakpoint='lg'
       // theme={'light'}
       style={{ background: '#1f2026' }}
-      className='h-screen'
+      className='h-auto'
       // flex-[0_0_350px] max-w-full basis-0
       // className={styles.sidebar}
       collapsed={true}

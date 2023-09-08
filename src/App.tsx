@@ -27,7 +27,7 @@ function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: '/detail',
+      path: '/detail/:detailId',
       element: <DetailPage />,
       errorElement: <ErrorPage />,
     },
