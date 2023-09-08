@@ -7,7 +7,7 @@ import { Image } from 'antd'
 
 export const Card: FC<ICard> = ({ name, key, pic, location, id }) => {
   return (
-    <div className='bg-gray-light w-full mb-8 p-5 rounded-3xl relative' key={key}>
+    <div className='bg-gray-light w-full mb-8 p-5 rounded-3xl relative shadow-md' key={key}>
       <div className='flex items-center'>
         {' '}
         {/* <div className='top-[-35px] absolute'>

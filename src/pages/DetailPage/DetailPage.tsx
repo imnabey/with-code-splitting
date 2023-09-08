@@ -76,10 +76,7 @@ export default function DetailPage() {
                 >
                   Edit Profile
                 </Button>
-                <Button
-                  // size='large'
-                  className='px-10 py-5 flex items-center shadow-none mr-5 font-semibold rounded-3xl '
-                >
+                <Button className='px-10 py-5 flex items-center shadow-none mr-5 font-semibold rounded-3xl '>
                   Delete Profile
                 </Button>
               </div>
@@ -87,10 +84,10 @@ export default function DetailPage() {
           </div>
 
           <div className='text-2xl text-left font-bold mb-2'>More tourists</div>
-          <div className='text-left text-lg text-gray-medium mb-8'>
+          <div className='text-left text-md text-gray-medium mb-8'>
             You can find more tourists here!
           </div>
-          <div className='bg-gray-light px-10 py-5 rounded-3xl'>
+          <div className='bg-gray-light px-10 py-5 shadow-md rounded-3xl'>
             {' '}
             {touristListData.slice(0, 4).map((item: any, index: any) => (
               <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
@@ -118,20 +115,16 @@ export default function DetailPage() {
 
         <div className='w-[30%]'>
           <div className='h-[75vh] text-left  mb-10  rounded-3xl'>
-            <div className='text-gray text-2xl font-bold mb-7'>Another Tourists</div>
+            <div className='text-gray text-2xl font-bold'>Another Tourists</div>
+            <div className='text-left text-md text-gray-medium mb-8'>
+              Another tourists are here!
+            </div>
             {touristListData.slice(0, 8).map((item: any, index: any) => (
               <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
-                {/* <div className='flex items-center'> */}
                 <div className='text-left'>
-                  {/* <div className=' mb-2'> */}
                   <div className='text-lg font-semibold'>{item.tourist_name}</div>
-                  {/* <div className='text-[#ffffff] text-xs bg-ocean-medium py-1 px-3 rounded-2xl'>
-                      {item.tourist_location}
-                    </div> */}
-                  {/* </div> */}
-                  <div className='text-sm'>{item.id}</div>
+                  <div className='text-sm'> {item.tourist_location}</div>
                 </div>
-                {/* </div> */}
               </div>
             ))}
           </div>
@@ -139,9 +132,6 @@ export default function DetailPage() {
 
         {/* </Row> */}
       </div>
-
-      {/* </ul> */}
-      {/* <div id="detail"></div> */}
     </ProtectedLayout>
   )
 }

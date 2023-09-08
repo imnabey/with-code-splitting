@@ -39,8 +39,8 @@ function App() {
         components: {
           Menu: {
             colorBgContainer: 'transparent',
-            colorItemBgHover: 'red',
-            colorItemBgSelected: 'blue',
+            colorItemBgHover: '#70A0AF',
+            colorItemBgSelected: '#70A0AF',
             colorItemTextSelected: '#...',
           },
           Input: {
@@ -56,7 +56,6 @@ function App() {
         token: {
           // Seed Token
           colorPrimary: '#383B43',
-
           borderRadius: 2,
 
           // Alias Token

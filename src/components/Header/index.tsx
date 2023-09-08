@@ -16,7 +16,7 @@ export const Header: FC = () => {
     <div className='text-left flex w-full'>
       <div className='w-[80%]'>
         <div className='font-bold text-4xl text-ocean-medium mb-2'>Find the tourist here!</div>
-        <div className='text-lg text-gray-medium'>4.45 pm, 21 July 2023</div>
+        <div className='text-md text-gray-medium'>4.45 pm, 21 July 2023</div>
         {/* <Search
           placeholder='input search text'
           allowClear
@@ -48,16 +48,12 @@ export const Header: FC = () => {
         <div className='relative right-10 w-[80px]'>
           <div className='absolute bg-[#FAF9FA] h-14 w-14 rounded-lg right-[-32px]' />
           <LogoutOutlined
-            style={{ fontSize: '25px' }}
+            style={{ fontSize: '22px' }}
             className='absolute z-10 right-[-18px] top-[15px]'
           />
         </div>
       </div>
-
-      {/* <div className=' w-full mb-6 rounded-3xl'>Header</div> */}
     </div>
-
-    // </div>
   )
 }
 
