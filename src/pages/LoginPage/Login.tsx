@@ -40,7 +40,7 @@ const Login: React.FC = () => {
         </div>
         <div className={clsx('md:w-2/5 flex items-center relative h-screen justify-center')}>
           <div className='w-[80%]'>
-            <img src={LoginGlass} className='h-12 mb-4' />
+            <img src={LoginGlass} alt='icon-glassess' className='h-12 mb-4' />
             <div className='text-4xl font-bold mb-3'>Welcome Back!</div>
             <div className='mb-12 text-gray-medium text-lg'>Please enter your details</div>
             <Form

@@ -16,7 +16,7 @@ const Sidebar: FC = () => {
     >
       <div className='py-10'>
         <Link to='/'>
-          <img src={WhiteGlass} className='h-10' />
+          <img src={WhiteGlass} alt={'icon-white-glasses'} className='h-10' />
         </Link>
 
         <div className='h-[50vh] flex items-center justify-center'>

@@ -128,6 +128,7 @@ const DetailPage = () => {
                   <div className='flex items-center'>
                     <img
                       src={item.tourist_profilepicture}
+                      alt={item.tourist_name}
                       className='rounded-full w-[60px] h-[60px]'
                     />
                     <div className='ml-5 text-left '>

@@ -31,7 +31,7 @@ const Register: React.FC = () => {
     <MainLayout>
       <div className='md:flex w-full block'>
         <div className='md:w-3/5 hidden bg-gray-light h-screen md:flex justify-center items-center'>
-          <img src={LoginPic} className='h-4/5' />
+          <img src={LoginPic} alt='login-pic' className='h-4/5' />
         </div>
         <div className={clsx('md:w-2/5 flex items-center relative h-screen justify-center')}>
           <div className='w-[80%]'>

@@ -8,7 +8,7 @@ const Card: FC<ICard> = ({ name, pic, location, id }) => {
     <Link to={`/detail/${id}`}>
       <div className='bg-gray-light w-full mb-8 p-5 rounded-3xl relative shadow-md'>
         <div className='flex items-center'>
-          <img src={pic} className='rounded-full h-[65px] w-[65px]' />
+          <img src={pic} className='rounded-full h-[65px] w-[65px]' alt={name} />
           <div className='ml-5 text-left '>
             <div className='flex items-center  mb-2'>
               <div className='text-xl text-gray font-semibold mr-2'>{name}</div>

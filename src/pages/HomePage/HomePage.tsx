@@ -89,6 +89,7 @@ const Homepage = () => {
               {touristListData.slice(0, 7).map((picItem: any, picIndex: any) => (
                 <img
                   key={picIndex}
+                  alt={picItem.tourist_name}
                   src={picItem.tourist_profilepicture}
                   className='rounded-full w-7'
                 />

@@ -43,7 +43,11 @@ export const Header: FC = () => {
       <div className='md:w-[25%] justify-end flex md:mb-0 mb-10'>
         <div className='flex rounded-lg mr-5 py-2 items-center w-full'>
           <div className='w-[20%] mr-4'>
-            <img src={userData?.avatar} className='rounded-full h-[42px] w-[42px]' />
+            <img
+              src={userData?.avatar}
+              alt={userData?.name}
+              className='rounded-full h-[42px] w-[42px]'
+            />
           </div>
 
           <div className='w-[80%] '>
