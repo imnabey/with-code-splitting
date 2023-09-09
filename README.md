@@ -53,7 +53,7 @@ In the project directory, you can run:
 The commit rules uses conventional commit / semantic commit
 
 ## Deployment
-Deploy this project is using `netlify`. 
+Deploy this project is using `netlify`. url: https://biro-perjalanan-nabilah.netlify.app/login. 
 
 ## Feature Website
 - Login
