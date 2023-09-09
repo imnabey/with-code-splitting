@@ -49,6 +49,9 @@ In the project directory, you can run:
 - Code spliting using react lazy
 - Use callback for memoization function reference
 
+## Commit
+The commit rules uses conventional commit / semantic commit
+
 ## Deployment
 Deploy this project is using `netlify`. 
 
