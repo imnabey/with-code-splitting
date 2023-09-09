@@ -2,16 +2,13 @@ import React from 'react'
 import { Button, Form, Input } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
+import clsx from 'clsx'
+
 import { register, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
-import clsx from 'clsx'
 import LoginPic from 'src/assets/img/login-pic.svg'
 import LoginGlass from 'src/assets/img/glasses.svg'
 import MainLayout from 'src/components/layout/MainLayout'
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
 
 type FieldType = {
   email?: string
@@ -20,26 +17,23 @@ type FieldType = {
   name?: string
 }
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-
   const isLoading = useSelector(selectLoading)
   const errorMessage = useSelector(selectErrorMessage)
   const user = useSelector(selectUser)
   const navigate = useNavigate()
 
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
+  }
+
   const onFinish = (values: { email: string; password: string; name: string }) => {
     dispatch(register({ email: values.email, password: values.password, name: values.name }))
     console.log('Success:', values)
-    // return // navigate('/', { replace: true })
     navigate('/login')
   }
-  // console.log(user, 'user')
-  // if (user) {
-  //   return <Navigate replace to='/login' />
-  // }
 
-  // console.log(user)
   return (
     <MainLayout>
       <div className='md:flex w-full block'>
@@ -125,4 +119,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default Register

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Form, Input, Modal, Image } from 'antd'
 import clsx from 'clsx'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
 import { editTourist, getTouristById } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
 
@@ -13,10 +14,6 @@ interface IModal {
   id: string
   email: string
   pic: string
-  // handleToggle: (param: any, e: any) => void,
-  // favorite: number[],
-  // username: string,
-  // onClick: () => void
 }
 type FieldType = {
   email?: string
@@ -35,27 +32,10 @@ const ModalUpdateProfile: React.FC<IModal> = ({
   id,
   pic,
 }) => {
-  // const [loading, setLoading] = useState(false)
-  // const [open, setOpen] = useState(false)
   const dispatch = useDispatch<AppDispatch>()
   const [form] = Form.useForm()
 
-  // const onFinish = (values: { email: string; password: string }) => {
-  //   // dispatch(login({ email: values.email, password: values.password }))
-  //   console.log('Success:', values)
-  //   setOpen(false)
-  //   // navigate('/', { replace: true })
-  // }
-  // const onFinishFailed = (errorInfo: any) => {
-  //   console.log('Failed:', errorInfo)
-  //   setOpen(false)
-  // }
-
   const handleOk = () => {
-    // setLoading(true)
-    // setTimeout(() => {
-    //   // setLoading(false)
-    // }, 3000)
     form
       .validateFields()
       .then((values) => {
@@ -70,7 +50,6 @@ const ModalUpdateProfile: React.FC<IModal> = ({
         )
         dispatch(getTouristById(id))
         setOpen(false)
-        // onCreate(values)
       })
       .catch((info) => {
         console.log('Validate Failed:', info)
@@ -85,9 +64,6 @@ const ModalUpdateProfile: React.FC<IModal> = ({
     <>
       <Modal
         open={open}
-        // title='Title'
-        // className='rounded-3xl'
-
         onOk={handleOk}
         width={600}
         onCancel={handleCancel}
@@ -131,8 +107,6 @@ const ModalUpdateProfile: React.FC<IModal> = ({
             id: id,
             email: email,
           }}
-          // onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
           autoComplete='off'
         >
           <Form.Item<FieldType>
@@ -173,16 +147,6 @@ const ModalUpdateProfile: React.FC<IModal> = ({
               )}
             />
           </Form.Item>
-
-          {/* <Form.Item>
-            <Button
-              type='primary'
-              className='text-xl h-14 w-full font-semibold rounded-3xl shadow-none'
-              htmlType='submit'
-            >
-              Login
-            </Button>
-          </Form.Item> */}
         </Form>
       </Modal>
     </>

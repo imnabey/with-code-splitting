@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { FC } from 'react'
 import { Button, Form, Input, Modal, Image } from 'antd'
 import clsx from 'clsx'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
 import { addTouristList } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
 
@@ -9,16 +10,8 @@ interface IModal {
   open: boolean
   setOpen: (value: boolean) => void
   setCurrent: (value: number) => void
-  // name: string,
-  // location: string,
-  // key: number,
-  // id: string
-  // company: string,
-  // handleToggle: (param: any, e: any) => void,
-  // favorite: number[],
-  // username: string,
-  // onClick: () => void
 }
+
 type FieldType = {
   email?: string
   password?: string
@@ -27,33 +20,16 @@ type FieldType = {
   location?: string
 }
 
-const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
+const ModalAddProfile: FC<IModal> = ({ open, setOpen, setCurrent }) => {
   const dispatch = useDispatch<AppDispatch>()
-
-  // const [loading, setLoading] = useState(false)
-  // const [open, setOpen] = useState(false)
   const [form] = Form.useForm()
-  // const onFinish = (values: { email: string; password: string }) => {
-  //   // dispatch(login({ email: values.email, password: values.password }))
-  //   console.log('Success:', values)
-  //   setOpen(false)
-  //   // navigate('/', { replace: true })
-  // }
-  // const onFinishFailed = (errorInfo: any) => {
-  //   console.log('Failed:', errorInfo)
-  //   setOpen(false)
-  // }
 
   const handleOk = () => {
-    // setLoading(true)
-    // setTimeout(() => {
-    //   // setLoading(false)
-    // }, 3000)
     form
       .validateFields()
       .then((values) => {
         form.resetFields()
-        console.log(values)
+
         dispatch(
           addTouristList({
             tourist_email: values.email,
@@ -63,7 +39,6 @@ const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
         )
         setOpen(false)
         setCurrent(240)
-        // onCreate(values)
       })
       .catch((info) => {
         console.log('Validate Failed:', info)
@@ -78,8 +53,6 @@ const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
     <>
       <Modal
         open={open}
-        // title='Title'
-        // className='rounded-3xl'
         onOk={handleOk}
         width={600}
         onCancel={handleCancel}
@@ -103,10 +76,7 @@ const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
       >
         <div className='absolute top-[-50px] left-[255px] '>
           <div className='relative'>
-            {' '}
-            <div className='absolute rounded-full bg-[#ffffff] left-[-10px] top-[-8px] h-[110px] w-[110px]'>
-              {' '}
-            </div>
+            <div className='absolute rounded-full bg-[#ffffff] left-[-10px] top-[-8px] h-[110px] w-[110px]'></div>
             <Image
               src={
                 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/672.jpg'
@@ -123,8 +93,6 @@ const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
           name='basic'
           layout='vertical'
           initialValues={{ remember: true }}
-          // onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
           autoComplete='off'
         >
           <Form.Item<FieldType>
@@ -165,16 +133,6 @@ const ModalAddProfile: React.FC<IModal> = ({ open, setOpen, setCurrent }) => {
               )}
             />
           </Form.Item>
-
-          {/* <Form.Item>
-            <Button
-              type='primary'
-              className='text-xl h-14 w-full font-semibold rounded-3xl shadow-none'
-              htmlType='submit'
-            >
-              Login
-            </Button>
-          </Form.Item> */}
         </Form>
       </Modal>
     </>

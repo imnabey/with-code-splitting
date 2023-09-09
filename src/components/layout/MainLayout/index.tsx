@@ -1,11 +1,12 @@
-import { Navigate } from 'react-router-dom'
+// import { Navigate, useLocation } from 'react-router-dom'
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const token = localStorage.getItem('token') || ''
+export const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  // const token = localStorage.getItem('token') || ''
+  // const location = useLocation()
 
-  if (token) {
-    return <Navigate replace to='/' />
-  }
+  // // if (token) {
+  // //   return <Navigate replace to={location.pathname} />
+  // // }
 
   return (
     <>
@@ -13,3 +14,5 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     </>
   )
 }
+
+export default MainLayout

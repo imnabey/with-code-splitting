@@ -1,18 +1,14 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
-// import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom'
+
 import { login, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import MainLayout from 'src/components/layout/MainLayout'
 import LoginPic from 'src/assets/img/login-pic.svg'
 import LoginGlass from 'src/assets/img/glasses.svg'
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
 
 type FieldType = {
   email?: string
@@ -26,17 +22,23 @@ const Login: React.FC = () => {
   const isLoading = useSelector(selectLoading)
   const errorMessage = useSelector(selectErrorMessage)
   const user = useSelector(selectUser)
+  const location = useLocation()
+  const urlFrom = location.state?.from || '/'
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
+  }
 
   const onFinish = (values: { email: string; password: string }) => {
     dispatch(login({ email: values.email, password: values.password }))
-    console.log('Success:', values)
+    navigate(urlFrom, { replace: true })
   }
 
-  // console.log(user)
-
-  if (user.name) {
-    return <Navigate replace to='/' />
-  }
+  // if (user.name) {
+  //   console.log(user.name,"kkkkk")
+  //   return
+  // <Navigate replace to={urlFrom} />
+  // }
 
   return (
     <MainLayout>

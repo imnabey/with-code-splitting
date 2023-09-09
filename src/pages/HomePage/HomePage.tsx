@@ -1,57 +1,47 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getTouristList, touristList, touristStatus, totalTourists } from 'src/store/touristSlice'
-import ProtectedLayout from 'src/components/layout/ProtectedLayout'
-import { AppDispatch } from 'src/store'
-// import { Col, Row } from 'antd'
-import Card from 'src/components/Card'
-import Pagination from 'src/components/Pagination'
 import { Button } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import type { PaginationProps } from 'antd'
+
+import { AppDispatch } from 'src/store'
+import { getTouristList, touristList, totalTourists } from 'src/store/touristSlice'
+import ProtectedLayout from 'src/components/layout/ProtectedLayout'
+import Card from 'src/components/Card'
+import Pagination from 'src/components/Pagination'
+
 import ModalAddProfile from './components/ModalAddProfile'
 
-export default function Homepage() {
+const Homepage = () => {
+  const [open, setOpen] = useState(false)
+  const [current, setCurrent] = useState(1)
+
   const dispatch = useDispatch<AppDispatch>()
   const touristListData = useSelector(touristList)
   const totalTouristsData = useSelector(totalTourists)
-  const [open, setOpen] = useState(false)
-  const [current, setCurrent] = useState(1)
-  // const touristStatusData = useSelector(touristStatus)
 
-  const initFetch = useCallback(() => {
-    dispatch(getTouristList(current))
-  }, [dispatch, current])
-
-  useEffect(() => {
-    initFetch()
-  }, [initFetch])
-
-  // useEffect(() => {
-  //   // if (touristStatusData === 'idle') {
-  //   dispatch(getTouristList())
-
-  //   // }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [dispatch])
+  const token = localStorage.getItem('token') || ''
 
   const showModal = () => {
     setOpen(true)
   }
-  console.log(touristListData, 'touristListData')
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrent(page)
   }
 
+  const initFetch = useCallback(() => {
+    dispatch(getTouristList({ page: current, token }))
+  }, [dispatch, current, token])
+
+  useEffect(() => {
+    initFetch()
+  }, [initFetch, token])
+
   return (
     <ProtectedLayout>
-      {/* <div id="sidebar"> */}
-      {/* <h1>Homepage</h1> */}
-      {/* <ul> */}
-
-      <div className='flex mt-16 w-full'>
-        <div className='w-[70%] mr-10'>
+      <div className='md:flex mt-16 w-full'>
+        <div className='md:w-[70%] md:mr-10'>
           <div className='flex justify-between mb-10'>
             <div>
               <div className='text-2xl text-left font-bold text-gray'>Tourist Data</div>
@@ -69,25 +59,25 @@ export default function Homepage() {
           </div>
 
           {touristListData.map((item: any, index: any) => (
-            // <Col className='gutter-row' span={8}>
-            <Card
-              key={index}
-              name={item.tourist_name}
-              pic={item.tourist_profilepicture}
-              location={item.tourist_location}
-              id={item.id}
-            />
-            // </Col>
+            <div key={item.id}>
+              <Card
+                name={item.tourist_name}
+                pic={item.tourist_profilepicture}
+                location={item.tourist_location}
+                id={item.id}
+              />
+            </div>
           ))}
-          <Pagination onChange={onChange} current={current} totalData={totalTouristsData} />
+          <div className='mb-10 md:mb-0'>
+            <Pagination onChange={onChange} current={current} totalData={totalTouristsData} />
+          </div>
         </div>
-        <div className='w-[30%]'>
-          <div className='h-[50vh] text-left px-20 py-14 mb-10 shadow-md bg-gray rounded-3xl'>
+        <div className='md:w-[30%]'>
+          <div className='md:h-[50vh] h-auto text-left px-20 py-14 mb-10 shadow-md bg-gray rounded-3xl'>
             <div className='text-[#ffffff] text-4xl font-bold mb-7'>
               Number of <br /> Tourists
             </div>
             <div className='flex items-baseline mb-14'>
-              {' '}
               <div className='text-[#ffffff] text-7xl font-bold  mr-2'> {totalTouristsData} </div>
               <div className='text-3xl text-[#ffffff] font-semibold'>people</div>
             </div>
@@ -105,7 +95,7 @@ export default function Homepage() {
               ))}
             </div>
           </div>
-          <div className='h-[25vh] text-left p-12 shadow-md  bg-ocean-medium rounded-3xl'>
+          <div className='md:h-[25vh] h-auto text-left p-12 shadow-md  bg-ocean-medium rounded-3xl'>
             <div className='text-[#ffffff] text-2xl mb-5 font-bold'>Permission Role:</div>
             <div className='text-[#ffffff] text-xl font-semibold'>
               You can delete, update, search <br /> or add tourist data as well <br /> by clicking
@@ -113,15 +103,11 @@ export default function Homepage() {
             </div>
           </div>
         </div>
-
-        {/* </div> */}
-
-        {/* </Row> */}
       </div>
 
-      {/* </ul> */}
-      {/* <div id="detail"></div> */}
       <ModalAddProfile open={open} setOpen={setOpen} setCurrent={setCurrent} />
     </ProtectedLayout>
   )
 }
+
+export default Homepage

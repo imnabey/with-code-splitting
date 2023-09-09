@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import { RootState } from 'src/store'
 import { getTouristListAPI, getTouristByIdAPI, addTouristAPI, deleteTouristAPI, updateTouristAPI } from 'src/services/api/touristAPI'
 
@@ -6,10 +7,6 @@ interface TouristState {
   error: null,
   status: 'idle' | 'loading' | 'failed',
   tourists: string[],
-  // touristId: {
-  //   tourist_profilepicture: string,
-  //   tourist_name: string
-  // },
   totalTourists: number,
   totalPage: number,
   touristById: {
@@ -40,11 +37,14 @@ const initialState: TouristState = {
 
 export const getTouristList = createAsyncThunk(
   'tourist/getList',
-  async (page: number) => {
-    const response = await getTouristListAPI(page)
+  async (data: { page: number, token: string }) => {
+    const response = await getTouristListAPI(data)
     return response
   },
 )
+
+const token = localStorage.getItem('token') || "";
+console.log(token, "tokenn KK")
 
 export const getTouristById = createAsyncThunk(
   'tourist/getTouristId',
@@ -69,6 +69,7 @@ export const deleteTourist = createAsyncThunk(
     return response
   }
 );
+
 export const editTourist = createAsyncThunk(
   'tourist/editTourist',
   async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string }) => {
@@ -76,7 +77,6 @@ export const editTourist = createAsyncThunk(
     return response
   }
 );
-
 
 export const touristSlice = createSlice({
   name: 'tourist',
@@ -90,17 +90,12 @@ export const touristSlice = createSlice({
       })
       .addCase(deleteTourist.fulfilled, (state) => {
         state.status = 'idle'
-        // state.tourists = action.payload
       })
       .addCase(editTourist.fulfilled, (state) => {
         state.status = 'idle'
-        // state.tourists = action.payload
       })
       .addCase(addTouristList.fulfilled, (state) => {
-        // console.log([state.tourists.push(action.payload)],)
         state.status = 'idle'
-        // state.tourists = [state.tourists.push(action.payload)] as 
-
       })
       .addCase(getTouristList.pending, state => {
         state.status = 'loading'
@@ -113,7 +108,6 @@ export const touristSlice = createSlice({
       })
       .addCase(getTouristList.rejected, (state) => {
         state.status = 'failed'
-        // state.error = action.error.message
       })
 
   },

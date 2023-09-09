@@ -1,7 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import dayjs from 'dayjs'
+import { isEqual } from 'lodash'
+import { Button, Image } from 'antd'
+import {
+  MailOutlined,
+  ClockCircleOutlined,
+  EnvironmentOutlined,
+  StarOutlined,
+} from '@ant-design/icons'
 
 import {
   getTouristList,
@@ -10,47 +19,31 @@ import {
   getTouristById,
   touristId,
 } from 'src/store/touristSlice'
-import ProtectedLayout from 'src/components/layout/ProtectedLayout'
 import { AppDispatch } from 'src/store'
-import {
-  MailOutlined,
-  ClockCircleOutlined,
-  EnvironmentOutlined,
-  StarOutlined,
-} from '@ant-design/icons'
-// import Card from 'src/components/Card'
-import { Button, Image } from 'antd'
+
+import ProtectedLayout from 'src/components/layout/ProtectedLayout'
+import { usePrevious } from 'src/utils/hooks'
+
 import ModalUpdateProfile from './components/ModalEditProfile'
 import ModalDeleteProfile from './components/ModalDeleteProfile'
 
-// import { Col, Row } from 'antd'
-// import Card from 'src/components/Card'
-
-export default function DetailPage() {
-  const dispatch = useDispatch<AppDispatch>()
-  const location = useLocation()
-  const touristListData = useSelector(touristList)
-  const touristByIdData = useSelector(touristId)
+const DetailPage = () => {
   const [open, setOpen] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
-  const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-  console.log('pathname', detailId)
+  const dispatch = useDispatch<AppDispatch>()
+  const touristListData = useSelector(touristList)
+  const touristByIdData = useSelector(touristId)
   const touristStatusData = useSelector(touristStatus)
+  const location = useLocation()
+  const prevLocation = usePrevious(location.pathname)
+  const token = localStorage.getItem('token') || ''
+  const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+  const joinDate = dayjs(touristByIdData.createdat)
+  const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
 
   const initFetch = useCallback(() => {
-    dispatch(getTouristList(1))
-  }, [dispatch])
-
-  useEffect(() => {
-    initFetch()
-  }, [initFetch])
-
-  useEffect(() => {
-    if (touristStatusData === 'idle') {
-      dispatch(getTouristById(detailId))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    dispatch(getTouristList({ page: 1, token }))
+  }, [dispatch, token])
 
   const showModal = () => {
     setOpen(true)
@@ -59,22 +52,23 @@ export default function DetailPage() {
   const showModalDelete = () => {
     setOpenDelete(true)
   }
-  const joinDate = dayjs(touristByIdData.createdat)
-  const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
-  // console.log(touristByIdData, 'touristListData')
+
+  useEffect(() => {
+    initFetch()
+  }, [initFetch, token])
+
+  useEffect(() => {
+    if (touristStatusData === 'idle' || !isEqual(prevLocation, location.pathname)) {
+      dispatch(getTouristById(detailId))
+    }
+  }, [location.pathname, dispatch, detailId])
 
   return (
     <ProtectedLayout>
-      {/* <div id="sidebar"> */}
-      {/* <h1>Homepage</h1> */}
-      {/* <ul> */}
-
-      <div className='flex mt-16 w-full'>
-        {/* <Row gutter={[30, 30]}> */}
-        {/* <div className=''> */}
-        <div className='w-[70%] mr-10'>
-          <div className='flex w-full mb-16'>
-            <div className='w-[20%]'>
+      <div className='md:flex mt-16 w-full'>
+        <div className='md:w-[70%] md:mr-10'>
+          <div className='md:flex w-full mb-16'>
+            <div className='md:w-[20%] md:mb-0 mb-5'>
               <Image
                 src={touristByIdData.tourist_profilepicture}
                 className='rounded-full mb-10'
@@ -83,7 +77,7 @@ export default function DetailPage() {
               />
             </div>
 
-            <div className='text-left w-[70%]'>
+            <div className='text-left md:w-[70%]'>
               <div className='text-3xl font-bold text-gray mb-2'>
                 {touristByIdData.tourist_name}
               </div>
@@ -127,50 +121,51 @@ export default function DetailPage() {
           <div className='text-left text-md text-gray-medium mb-8'>
             You can find more tourists here!
           </div>
-          <div className='bg-gray-light px-10 py-5 shadow-md rounded-3xl'>
-            {' '}
-            {touristListData.slice(0, 4).map((item: any, index: any) => (
-              <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
-                <div className='flex items-center'>
-                  <Image
-                    src={item.tourist_profilepicture}
-                    className='rounded-full'
-                    width={60}
-                    height={60}
-                  />
-                  <div className='ml-5 text-left '>
-                    <div className='flex items-center  mb-2'>
-                      <div className='text-xl font-semibold mr-2'>{item.tourist_name}</div>
-                      <div className='text-[#ffffff] text-xs bg-ocean-medium py-1 px-3 rounded-2xl'>
-                        {item.tourist_location}
+          <div className='bg-gray-light px-10 py-5 mb-10 md:mb-0 shadow-md rounded-3xl'>
+            {touristListData.map((item: any, index: any) => (
+              <Link to={`/detail/${item.id}`}>
+                <div className='w-full p-2 mb-2 rounded-3xl relative' key={index}>
+                  <div className='flex items-center'>
+                    <img
+                      src={item.tourist_profilepicture}
+                      className='rounded-full w-[60px] h-[60px]'
+                    />
+                    <div className='ml-5 text-left '>
+                      <div className='flex items-center  mb-2'>
+                        <div className='text-xl text-gray font-semibold mr-2'>
+                          {item.tourist_name}
+                        </div>
+                        <div className='text-[#ffffff] text-xs bg-ocean-medium py-1 px-3 rounded-2xl'>
+                          {item.tourist_location}
+                        </div>
                       </div>
+                      <div className='text-sm text-gray-medium'>{item.id}</div>
                     </div>
-                    <div className='text-sm'>{item.id}</div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
-        <div className='w-[30%]'>
-          <div className='h-[75vh] text-left  mb-10  rounded-3xl'>
+        <div className='md:w-[30%]'>
+          <div className='text-left mb-10 rounded-3xl'>
             <div className='text-gray text-2xl font-bold'>Another Tourists</div>
             <div className='text-left text-md text-gray-medium mb-8'>
               Another tourists are here!
             </div>
             {touristListData.slice(0, 8).map((item: any, index: any) => (
-              <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
-                <div className='text-left'>
-                  <div className='text-lg font-semibold'>{item.tourist_name}</div>
-                  <div className='text-sm'> {item.tourist_location}</div>
+              <Link to={`/detail/${item.id}`}>
+                <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
+                  <div className='text-left'>
+                    <div className='text-lg text-gray font-semibold'>{item.tourist_name}</div>
+                    <div className='text-sm text-gray-medium'> {item.tourist_location}</div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
-
-        {/* </Row> */}
       </div>
 
       <ModalUpdateProfile
@@ -194,3 +189,5 @@ export default function DetailPage() {
     </ProtectedLayout>
   )
 }
+
+export default DetailPage

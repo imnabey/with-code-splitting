@@ -1,14 +1,10 @@
 import axios, { AxiosError } from 'axios'
-// import services from '.'
-// import utils from '../utils'
-
 interface MethodValueTypes {
   url: string
   data?: any
   headers?: any
   params?: any
 }
-
 interface OptionsTypes {
   authErrorRedirect?: string
 }
@@ -101,10 +97,13 @@ const DELETE = async (value: MethodValueTypes, options?: OptionsTypes) => {
   //   throw error
   // }
 }
+const token = localStorage.getItem('token') || "";
+console.log(token, "tokenn HTTP")
 
 const GET = async (value: MethodValueTypes, options?: OptionsTypes) => {
   const { url, headers, params } = value
   // const token = utils.store.get('token') || ''
+
 
   const response = await axios.get(url, {
     headers: headers,

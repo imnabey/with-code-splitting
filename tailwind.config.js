@@ -8,19 +8,18 @@ export default {
   theme: {
     colors: {
       black: {
-        DEFAULT: '#1F2026',
+        DEFAULT: '#1f2026',
       },
       ocean: {
-        medium: '#70A0AF',
+        medium: '#70a0af',
       },
       gray: {
-        DEFAULT: '#23242A',
+        DEFAULT: '#23242a',
         dark: '#ecebff',
-        light: '#EDECED',
+        light: '#edeced',
         medium: '#79787B',
       },
     },
     extend: {},
   },
-  // plugins: [],
 }

@@ -1,8 +1,10 @@
-import { GET, POST, DELETE, PUT } from 'src/services/http'
-import { END_POINT } from 'src/constant'
 import qs from 'qs'
 
+import { GET, POST, DELETE, PUT } from 'src/services/http'
+import { END_POINT } from 'src/constant'
+
 const token = localStorage.getItem('token') || "";
+// console.log(token, "tokenn API")
 
 const headerJson = {
   Authorization: `Bearer ${token}`,
@@ -14,11 +16,12 @@ const headerXWwwForm = {
   'Content-Type': 'application/x-www-form-urlencoded',
 }
 
-const getTouristListAPI = (page: number) => {
+const getTouristListAPI = (data: { page: number, token: string }) => {
   const param = {
-    url: `${END_POINT}/api/Tourist?page=${page}`,
+    url: `${END_POINT}/api/Tourist?page=${data.page}`,
     headers: {
-      ...headerJson
+      Authorization: `Bearer ${data.token}`,
+      'Content-Type': 'application/json',
     },
   }
   return GET(param)
@@ -35,7 +38,7 @@ const getTouristByIdAPI = (id: string) => {
 }
 
 const addTouristAPI = (data: { tourist_name: string, tourist_email: string, tourist_location: string }) => {
-  console.log(data, "data")
+  // console.log(data, "data")
   const param = {
     url: `${END_POINT}/api/Tourist`,
     headers: {

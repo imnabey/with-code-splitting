@@ -1,7 +1,11 @@
+
+import qs from 'qs'
+
 import { POST, GET } from 'src/services/http'
 import { END_POINT } from 'src/constant'
-import qs from 'qs'
+
 const token = localStorage.getItem('token') || "";
+
 const loginAPI = (data: { email: string, password: string }) => {
   const param = {
     url: `${END_POINT}/api/authaccount/login`,
@@ -23,6 +27,7 @@ const registerAPI = (data: { email: string, password: string }) => {
   }
   return POST(param)
 }
+
 const getUserAPI = (id: string) => {
   const param = {
     url: `${END_POINT}/api/users/${id}`,
@@ -33,7 +38,6 @@ const getUserAPI = (id: string) => {
   }
   return GET(param)
 }
-
 
 const logout = () => {
   localStorage.removeItem("token");
