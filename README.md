@@ -23,7 +23,7 @@ example:
 
 ## CSS Rules
 This project  is using: 
-- Tailwind
+- Tailwind (Utility Css)
 - Mobile first approach
 - Antdesign
 
@@ -48,6 +48,9 @@ In the project directory, you can run:
 ## Performace improvement using
 - Code spliting using react lazy
 - Use callback for memoization function reference
+
+## Commit
+The commit rules uses conventional commit / semantic commit
 
 ## Deployment
 Deploy this project is using `netlify`. 
