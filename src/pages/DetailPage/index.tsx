@@ -4,8 +4,8 @@ import Lazyload from 'src/components/LazyLoad'
 
 const DetailPageLazy = React.lazy(() => import('./DetailPage'))
 
-const DetailPage = (props) => {
-  return <Lazyload component={DetailPageLazy} animationLoading {...props} />
+const DetailPage = () => {
+  return <Lazyload component={DetailPageLazy} />
 }
 
 export default DetailPage

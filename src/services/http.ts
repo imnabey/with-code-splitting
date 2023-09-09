@@ -1,13 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosError } from 'axios'
 interface MethodValueTypes {
   url: string
   data?: any
   headers?: any
   params?: any
-}
-
-interface OptionsTypes {
-  authErrorRedirect?: string
 }
 
 const TIMEOUT = 25000 //15 sec
@@ -31,7 +28,7 @@ axiosInstance.interceptors.response.use(
   },
 )
 
-const POST = async (value: MethodValueTypes, options?: OptionsTypes) => {
+const POST = async (value: MethodValueTypes) => {
   const { url, data, headers } = value
   try {
     const response = await axios.post(url, data, {
@@ -44,7 +41,7 @@ const POST = async (value: MethodValueTypes, options?: OptionsTypes) => {
   }
 }
 
-const PATCH = async (value: MethodValueTypes, options?: OptionsTypes) => {
+const PATCH = async (value: MethodValueTypes) => {
   const { url, data, headers } = value
 
   try {
@@ -57,7 +54,7 @@ const PATCH = async (value: MethodValueTypes, options?: OptionsTypes) => {
   }
 }
 
-const PUT = async (value: MethodValueTypes, options?: OptionsTypes) => {
+const PUT = async (value: MethodValueTypes) => {
   const { url, data, headers } = value
 
   try {
@@ -70,7 +67,7 @@ const PUT = async (value: MethodValueTypes, options?: OptionsTypes) => {
   }
 }
 
-const DELETE = async (value: MethodValueTypes, options?: OptionsTypes) => {
+const DELETE = async (value: MethodValueTypes) => {
   const { url, data, headers } = value
 
   try {
@@ -84,7 +81,7 @@ const DELETE = async (value: MethodValueTypes, options?: OptionsTypes) => {
 }
 
 
-const GET = async (value: MethodValueTypes, options?: OptionsTypes) => {
+const GET = async (value: MethodValueTypes) => {
   const { url, headers, params } = value
   try {
     const response = await axios.get(url, {

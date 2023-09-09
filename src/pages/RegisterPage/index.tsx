@@ -3,8 +3,8 @@ import Lazyload from 'src/components/LazyLoad'
 
 const RegisterLazy = React.lazy(() => import('./Register'))
 
-const Register = (props) => {
-  return <Lazyload component={RegisterLazy} animationLoading {...props} />
+const Register = () => {
+  return <Lazyload component={RegisterLazy} />
 }
 
 export default Register

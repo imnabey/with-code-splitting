@@ -2,17 +2,11 @@ import React, { Suspense } from 'react'
 
 interface Props {
   component: React.FC<any>
-  loaderCustom?: React.FC<any>
-  animationLoading?: boolean
 }
 
-const LazyLoad: React.FC<Props> = ({
-  component: Component,
-  loaderCustom: LoaderCustom,
-  ...rest
-}) => {
+const LazyLoad: React.FC<Props> = ({ component: Component, ...rest }) => {
   return (
-    <Suspense fallback={LoaderCustom ? <LoaderCustom /> : ''}>
+    <Suspense>
       <Component {...rest} />
     </Suspense>
   )

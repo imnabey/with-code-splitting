@@ -3,8 +3,8 @@ import Lazyload from '../../components/LazyLoad'
 
 const HomePageLazy = React.lazy(() => import('./HomePage'))
 
-const HomePage = props => {
-  return <Lazyload component={HomePageLazy} animationLoading {...props} />
+const HomePage = () => {
+  return <Lazyload component={HomePageLazy} />
 }
 
 export default HomePage

@@ -58,7 +58,7 @@ const Homepage = () => {
             </Button>
           </div>
 
-          {touristListData.map((item: any, index: any) => (
+          {touristListData.map((item: any) => (
             <div key={item.id}>
               <Card
                 name={item.tourist_name}

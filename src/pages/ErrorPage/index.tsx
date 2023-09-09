@@ -1,10 +1,11 @@
 import React from 'react'
-import Lazyload from '../../components/LazyLoad'
+
+import Lazyload from 'src/components/LazyLoad'
 
 const ErrorPageLazy = React.lazy(() => import('./ErrorPage'))
 
-const ErrorPage = (props) => {
-  return <Lazyload component={ErrorPageLazy} animationLoading {...props} />
+const ErrorPage = () => {
+  return <Lazyload component={ErrorPageLazy} />
 }
 
 export default ErrorPage

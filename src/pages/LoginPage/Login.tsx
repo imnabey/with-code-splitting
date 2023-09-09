@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, Navigate, useNavigate, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-import { login, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
+import { login } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import MainLayout from 'src/components/layout/MainLayout'
 import LoginPic from 'src/assets/img/login-pic.svg'
@@ -19,15 +19,9 @@ type FieldType = {
 const Login: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
-  const isLoading = useSelector(selectLoading)
-  const errorMessage = useSelector(selectErrorMessage)
-  const user = useSelector(selectUser)
+
   const location = useLocation()
   const urlFrom = location.state?.from || '/'
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
 
   const onFinish = (values: { email: string; password: string }) => {
     dispatch(login({ email: values.email, password: values.password }))
@@ -50,7 +44,6 @@ const Login: React.FC = () => {
               layout='vertical'
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete='off'
             >
               <Form.Item<FieldType>

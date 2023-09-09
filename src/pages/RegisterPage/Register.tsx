@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import clsx from 'clsx'
 
-import { register, selectLoading, selectErrorMessage, selectUser } from 'src/store/userSlice'
+import { register } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import LoginPic from 'src/assets/img/login-pic.svg'
 import LoginGlass from 'src/assets/img/glasses.svg'
@@ -19,14 +19,8 @@ type FieldType = {
 
 const Register: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const isLoading = useSelector(selectLoading)
-  const errorMessage = useSelector(selectErrorMessage)
-  const user = useSelector(selectUser)
-  const navigate = useNavigate()
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
+  const navigate = useNavigate()
 
   const onFinish = (values: { email: string; password: string; name: string }) => {
     dispatch(register({ email: values.email, password: values.password, name: values.name }))
@@ -52,7 +46,6 @@ const Register: React.FC = () => {
               layout='vertical'
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete='off'
             >
               <Form.Item<FieldType>
