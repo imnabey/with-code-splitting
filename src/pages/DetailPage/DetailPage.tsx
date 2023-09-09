@@ -68,7 +68,7 @@ const DetailPage = () => {
       <div className='md:flex mt-16 w-full'>
         <div className='md:w-[70%] md:mr-10'>
           <div className='md:flex w-full mb-16'>
-            <div className='md:w-[20%] md:mb-0 mb-5'>
+            <div className='md:w-[25%] md:mb-0 mb-5'>
               <Image
                 src={touristByIdData?.tourist_profilepicture}
                 className='rounded-full mb-10'
@@ -77,7 +77,7 @@ const DetailPage = () => {
               />
             </div>
 
-            <div className='text-left md:w-[70%]'>
+            <div className='text-left md:w-[75%]'>
               <div className='text-3xl font-bold text-gray mb-2'>
                 {touristByIdData?.tourist_name}
               </div>

@@ -31,14 +31,14 @@ export const Header: FC = () => {
 
   return (
     <div className='text-left flex md:flex-row flex-col-reverse w-full'>
-      <div className='md:w-[80%]'>
+      <div className='md:w-[75%]'>
         <div className='font-bold text-4xl text-ocean-medium mb-2'>Find the tourist here!</div>
         <div className='text-md text-gray-medium'>{nowFormat}</div>
       </div>
 
-      <div className='md:w-[20%] justify-end flex md:mb-0 mb-10'>
+      <div className='md:w-[25%] justify-end flex md:mb-0 mb-10'>
         <div className='flex rounded-lg mr-5 py-2 items-center w-full'>
-          <div className='w-[20%] mr-2'>
+          <div className='w-[20%] mr-4'>
             <img src={userData?.avatar} className='rounded-full h-[42px] w-[42px]' />
           </div>
 

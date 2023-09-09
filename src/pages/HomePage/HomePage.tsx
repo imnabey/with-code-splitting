@@ -73,16 +73,16 @@ const Homepage = () => {
           </div>
         </div>
         <div className='md:w-[30%]'>
-          <div className='md:h-[50vh] h-auto text-left px-20 py-14 mb-10 shadow-md bg-gray rounded-3xl'>
-            <div className='text-[#ffffff] text-4xl font-bold mb-7'>
+          <div className='md:h-[50vh] h-auto text-left p-12 mb-10 shadow-md bg-gray rounded-3xl'>
+            <div className='text-[#ffffff] text-2xl font-bold mb-7'>
               Number of <br /> Tourists
             </div>
-            <div className='flex items-baseline mb-14'>
-              <div className='text-[#ffffff] text-7xl font-bold  mr-2'> {totalTouristsData} </div>
-              <div className='text-3xl text-[#ffffff] font-semibold'>people</div>
+            <div className='flex items-baseline mb-10'>
+              <div className='text-[#ffffff] text-5xl font-bold  mr-2'> {totalTouristsData} </div>
+              <div className='text-xl text-[#ffffff] font-semibold'>people</div>
             </div>
 
-            <div className='text-[#ffffff] text-xl mb-10'>
+            <div className='text-[#ffffff] text-l mb-10'>
               You can see the details <br /> by clicking one card of the tourist list
             </div>
             <div className='flex item-center'>
@@ -97,7 +97,7 @@ const Homepage = () => {
           </div>
           <div className='md:h-[25vh] h-auto text-left p-12 shadow-md  bg-ocean-medium rounded-3xl'>
             <div className='text-[#ffffff] text-2xl mb-5 font-bold'>Permission Role:</div>
-            <div className='text-[#ffffff] text-xl font-semibold'>
+            <div className='text-[#ffffff] text-l font-semibold'>
               You can delete, update, search <br /> or add tourist data as well <br /> by clicking
               the action icon from each card!
             </div>
