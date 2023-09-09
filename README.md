@@ -1,28 +1,64 @@
-# Biro Perjalanan by Nabilah
+# Documentation for Biro Perjalanan by Nabilah
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## File & Folder Naming
 
-Currently, two official plugins are available:
+#### component -> PascalCase
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+example:
 
-## Expanding the ESLint configuration
+- pages/Homepage/index.tsx
+- pages/Homepage/UserTable.tsx
+- pages/Home.tsx
+- pages/account/AccountUser/index.tsx
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### not component -> hyphens-case
 
-- Configure the top-level `parserOptions` property like this:
+example:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- Wrapping folder
+- file scss name
+- file image name
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# datacaktra-test
+#### function -> camelCase
+
+## CSS Rules
+This project  is using: 
+- Tailwind
+- Mobile first approach
+- Antdesign
+
+## Start Project
+- Clone the project from git repository.
+
+In the project directory, you can run:
+
+- `npm intall`
+- `npm run dev`
+
+## Running Project Script
+In the project directory, you can run:
+
+##### `npm run dev` : Runs the app in the development mode.
+##### `npm run build` : Builds the app for production to the `build` folder
+
+
+## Project Technologies
+[<img align="left" alt="Typescript" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" style="padding-right:10px;" />]()[<img align="left" alt="Eslint" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" style="padding-right:10px;" />]()[<img align="left" alt="React" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" style="padding-right:10px;" />]()[<img align="left" alt="HTML5" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" style="padding-right:10px;" />]()[<img align="left" alt="Redux" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" style="padding-right:10px;" />](),`netlify`,`ant design`,`tailwind`,`vite`.
+
+## Performace improvement using
+- Code spliting using react lazy
+- Use callback for memoization function reference
+
+## Deployment
+Deploy this project is using `netlify`. 
+
+## Feature Website
+- Login
+- Register
+- Add tourist
+- Edit tourist
+- Delete tourist
+- View all tourists
+
+
+
