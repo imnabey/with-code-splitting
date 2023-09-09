@@ -53,7 +53,7 @@ In the project directory, you can run:
 The commit rules uses conventional commit / semantic commit
 
 ## Deployment
-Deploy this project is using `netlify`. 
+Deploy this project is using `netlify`. url: https://biro-perjalanan-nabilah.netlify.app/login. 
 
 ## Feature Website
 - Login
@@ -63,5 +63,13 @@ Deploy this project is using `netlify`.
 - Delete tourist
 - View all tourists
 
+## Performace Report
+<img width="1435" alt="Screen Shot 2023-09-10 at 00 23 51" src="https://github.com/imnabey/datacaktra-test/assets/40421876/5a96196b-9844-4691-a250-49c425eb7372">
 
-
+## Website view
+<img width="1439" alt="Screen Shot 2023-09-10 at 00 31 29" src="https://github.com/imnabey/datacaktra-test/assets/40421876/a467b13e-500d-4e5c-be61-030052ba1f59">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 33 00" src="https://github.com/imnabey/datacaktra-test/assets/40421876/8d2f230f-1372-41f9-bfdc-b0ab32079ae2">
+<img width="1439" alt="Screen Shot 2023-09-10 at 00 32 50" src="https://github.com/imnabey/datacaktra-test/assets/40421876/9bc3dbe5-e022-418e-818e-9c63e049c0a2">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 32 39" src="https://github.com/imnabey/datacaktra-test/assets/40421876/f1910d3e-bb62-41c5-bbd5-ffa6239e0e0d">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 31 50" src="https://github.com/imnabey/datacaktra-test/assets/40421876/095408b9-ce66-4b51-acae-d1ae373d192b">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 33 04" src="https://github.com/imnabey/datacaktra-test/assets/40421876/96bd6f26-2afe-4dd5-a74b-02cbce6cb2a3">
