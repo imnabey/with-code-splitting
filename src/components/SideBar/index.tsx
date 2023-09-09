@@ -6,7 +6,7 @@ import WhiteGlass from 'src/assets/img/white-glasses.svg'
 
 const { Sider } = Layout
 
-export const Sidebar: FC = () => {
+const Sidebar: FC = () => {
   return (
     <Sider
       breakpoint='lg'

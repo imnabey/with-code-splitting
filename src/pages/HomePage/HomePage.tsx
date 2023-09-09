@@ -20,7 +20,7 @@ const Homepage = () => {
   const touristListData = useSelector(touristList)
   const totalTouristsData = useSelector(totalTourists)
 
-  const token = localStorage.getItem('token') || ''
+  // const token = localStorage.getItem('token') || ''
 
   const showModal = () => {
     setOpen(true)
@@ -36,7 +36,7 @@ const Homepage = () => {
 
   useEffect(() => {
     initFetch()
-  }, [initFetch, token])
+  }, [initFetch])
 
   return (
     <ProtectedLayout>

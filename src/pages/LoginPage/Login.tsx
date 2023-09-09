@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 
-import { login } from 'src/store/userSlice'
+import { login, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 import MainLayout from 'src/components/layout/MainLayout'
 import LoginPic from 'src/assets/img/login-pic.svg'
@@ -19,13 +19,17 @@ type FieldType = {
 const Login: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
+  const datalogin = useSelector(selectUser)
 
   const location = useLocation()
   const urlFrom = location.state?.from || '/'
 
-  const onFinish = (values: { email: string; password: string }) => {
-    dispatch(login({ email: values.email, password: values.password }))
-    navigate(urlFrom, { replace: true })
+  const onFinish = async (values: { email: string; password: string }) => {
+    await dispatch(login({ email: values.email, password: values.password }))
+
+    if (datalogin.Token) {
+      navigate(urlFrom, { replace: true })
+    }
   }
 
   return (
@@ -37,12 +41,12 @@ const Login: React.FC = () => {
         <div className={clsx('md:w-2/5 flex items-center relative h-screen justify-center')}>
           <div className='w-[80%]'>
             <img src={LoginGlass} className='h-12 mb-4' />
-            <div className='text-5xl font-bold mb-5'>Welcome Back!</div>
-            <div className='text-md mb-14 text-gray-medium text-lg'>Please enter your details</div>
+            <div className='text-4xl font-bold mb-3'>Welcome Back!</div>
+            <div className='mb-12 text-gray-medium text-lg'>Please enter your details</div>
             <Form
               name='basic'
               layout='vertical'
-              initialValues={{ remember: true }}
+              // initialValues={{ remember: true }}
               onFinish={onFinish}
               autoComplete='off'
             >

@@ -1,14 +1,16 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
+import { ToastContainer } from 'react-toastify'
 
 import HomePage from 'src/pages/HomePage'
 import Login from 'src/pages/LoginPage'
 import ErrorPage from 'src/pages/ErrorPage'
 import RegisterPage from 'src/pages/RegisterPage'
 import DetailPage from 'src/pages/DetailPage'
+import { ProtectedRoute } from 'src/routes/ProtectedRoute'
 
 import './App.css'
-import { ProtectedRoute } from 'src/routes/ProtectedRoute'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   const token = localStorage.getItem('token') || ''
@@ -38,6 +40,7 @@ function App() {
         },
       }}
     >
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route

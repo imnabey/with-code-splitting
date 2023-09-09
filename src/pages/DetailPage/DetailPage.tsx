@@ -36,14 +36,14 @@ const DetailPage = () => {
   const touristStatusData = useSelector(touristStatus)
   const location = useLocation()
   const prevLocation = usePrevious(location.pathname)
-  const token = localStorage.getItem('token') || ''
+  // const token = localStorage.getItem('token') || ''
   const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
   const joinDate = dayjs(touristByIdData?.createdat)
   const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
-  console.log(token, 'token')
+
   const initFetch = useCallback(() => {
     dispatch(getTouristList({ page: 1 }))
-  }, [dispatch, token])
+  }, [dispatch])
 
   const showModal = () => {
     setOpen(true)
@@ -55,7 +55,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     initFetch()
-  }, [initFetch, token])
+  }, [initFetch])
 
   useEffect(() => {
     if (touristStatusData === 'idle' || !isEqual(prevLocation, location.pathname)) {

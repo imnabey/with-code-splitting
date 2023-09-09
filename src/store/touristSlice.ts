@@ -43,8 +43,6 @@ export const getTouristList = createAsyncThunk(
   },
 )
 
-// const token = localStorage.getItem('token') || "";
-// console.log(token, "tokenn KK")
 
 export const getTouristById = createAsyncThunk(
   'tourist/getTouristId',

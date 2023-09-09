@@ -22,9 +22,8 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate()
 
-  const onFinish = (values: { email: string; password: string; name: string }) => {
-    dispatch(register({ email: values.email, password: values.password, name: values.name }))
-    console.log('Success:', values)
+  const onFinish = async (values: { email: string; password: string; name: string }) => {
+    await dispatch(register({ email: values.email, password: values.password, name: values.name }))
     navigate('/login')
   }
 
@@ -37,8 +36,8 @@ const Register: React.FC = () => {
         <div className={clsx('md:w-2/5 flex items-center relative h-screen justify-center')}>
           <div className='w-[80%]'>
             <img src={LoginGlass} className='h-12 mb-4' />
-            <div className='text-5xl font-bold mb-5'>Create your account!</div>
-            <div className='text-md mb-14 text-gray-medium text-lg'>
+            <div className='text-4xl font-bold mb-4'>Create your account!</div>
+            <div className='text-md mb-12 text-gray-medium text-lg'>
               Start to manage the dashboard
             </div>
             <Form
@@ -97,7 +96,7 @@ const Register: React.FC = () => {
                 </Button>
               </Form.Item>
             </Form>
-            <div className='flex items-center justify-center mt-10 md:mt-40'>
+            <div className='flex items-center justify-center mt-10 md:mt-20'>
               <div className='flex items-center justify-center '>
                 <div className='mr-2'>Already have an account?</div>
                 <Link to='/login' className='no-underline text-gray font-semibold'>

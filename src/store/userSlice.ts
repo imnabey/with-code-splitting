@@ -10,11 +10,10 @@ const initialState = {
   currentUser: {
     name: "",
     email: "",
-    avatar: ""
+    avatar: "",
+    Token: ""
   },
 };
-// const token = localStorage.getItem('token') || "";
-// console.log(token, "tokenn KK")
 
 export const login = createAsyncThunk(
   'user/login',
@@ -84,7 +83,8 @@ export const userSlice = createSlice({
         state.currentUser = {
           name: "",
           email: "",
-          avatar: ""
+          avatar: "",
+          Token: ""
         };
       })
       .addCase(tokens.fulfilled, (state) => {

@@ -3,6 +3,7 @@ import { Button, Modal, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { EnvironmentOutlined, StarOutlined } from '@ant-design/icons'
 import clsx from 'clsx'
+import { toast } from 'react-toastify'
 
 import { useDispatch } from 'react-redux'
 import { deleteTourist } from 'src/store/touristSlice'
@@ -31,16 +32,25 @@ const ModalDeleteProfile: React.FC<IModal> = ({
   const navigate = useNavigate()
 
   const handleOk = () => {
-    dispatch(
-      deleteTourist({
-        tourist_email: email,
-        tourist_location: location,
-        tourist_name: name,
-        id: id,
-      }),
-    )
-    setOpen(false)
-    navigate('/')
+    try {
+      dispatch(
+        deleteTourist({
+          tourist_email: email,
+          tourist_location: location,
+          tourist_name: name,
+          id: id,
+        }),
+      )
+      setOpen(false)
+      toast.success('Data is successfully deleted!', {
+        position: toast.POSITION.TOP_CENTER,
+      })
+      navigate('/')
+    } catch (error) {
+      toast.success('Deleting data is failed!', {
+        position: toast.POSITION.TOP_CENTER,
+      })
+    }
   }
 
   const handleCancel = () => {

@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { Button, Form, Input, Modal, Image } from 'antd'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { addTouristList } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
@@ -39,9 +40,14 @@ const ModalAddProfile: FC<IModal> = ({ open, setOpen, setCurrent }) => {
         )
         setOpen(false)
         setCurrent(240)
+        toast.success('Data is successfully added!', {
+          position: toast.POSITION.TOP_CENTER,
+        })
       })
-      .catch((info) => {
-        console.log('Validate Failed:', info)
+      .catch(() => {
+        toast.error('Adding data is failed!', {
+          position: toast.POSITION.TOP_CENTER,
+        })
       })
   }
 

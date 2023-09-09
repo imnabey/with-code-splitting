@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Input, Modal, Image } from 'antd'
 import clsx from 'clsx'
 import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { editTourist, getTouristById } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
@@ -15,6 +16,7 @@ interface IModal {
   email: string
   pic: string
 }
+
 type FieldType = {
   email?: string
   password?: string
@@ -49,10 +51,15 @@ const ModalUpdateProfile: React.FC<IModal> = ({
           }),
         )
         dispatch(getTouristById(id))
+        toast.success('Data is successfully updated!', {
+          position: toast.POSITION.TOP_CENTER,
+        })
         setOpen(false)
       })
-      .catch((info) => {
-        console.log('Validate Failed:', info)
+      .catch(() => {
+        toast.error('Updating data is failed!', {
+          position: toast.POSITION.TOP_CENTER,
+        })
       })
   }
 

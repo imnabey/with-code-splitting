@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import { logouts, getUser, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
@@ -19,6 +20,9 @@ export const Header: FC = () => {
   const handleLogout = () => {
     dispatch(logouts())
     navigate('/login')
+    toast.success('You have logged out!', {
+      position: toast.POSITION.TOP_CENTER,
+    })
   }
 
   const initFetch = useCallback(() => {
@@ -57,7 +61,6 @@ export const Header: FC = () => {
             className='absolute z-10 right-[-18px] top-[15px]'
           />
         </div>
-        {/* </Link> */}
       </div>
     </div>
   )
