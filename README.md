@@ -23,7 +23,7 @@ example:
 
 ## CSS Rules
 This project  is using: 
-- Tailwind
+- Tailwind (Utility Css)
 - Mobile first approach
 - Antdesign
 
