@@ -1,12 +1,10 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { loginAPI } from 'src/services/api/userAPI'
 
-import { login, selectUser } from 'src/store/userSlice'
-import { AppDispatch } from 'src/store'
 import MainLayout from 'src/components/layout/MainLayout'
 import LoginPic from 'src/assets/img/login-pic.svg'
 import LoginGlass from 'src/assets/img/glasses.svg'
@@ -18,17 +16,18 @@ type FieldType = {
 }
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
-  const datalogin = useSelector(selectUser)
 
   const location = useLocation()
   const urlFrom = location.state?.from || '/'
 
   const onFinish = async (values: { email: string; password: string }) => {
-    await dispatch(login({ email: values.email, password: values.password }))
+    const response = await loginAPI({ email: values.email, password: values.password })
 
-    if (datalogin.Token) {
+    if (response.data.Token) {
+      localStorage.setItem('token', response.data.Token)
+      localStorage.setItem('id', response.data.Id)
+
       navigate(urlFrom, { replace: true })
       toast.success('Successfully login!', {
         position: toast.POSITION.TOP_CENTER,

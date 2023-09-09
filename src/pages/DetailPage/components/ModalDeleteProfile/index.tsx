@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { EnvironmentOutlined, StarOutlined } from '@ant-design/icons'
 import clsx from 'clsx'
 import { toast } from 'react-toastify'
-
 import { useDispatch } from 'react-redux'
+
 import { deleteTourist } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
+import { token } from 'src/utils/helper'
 
-interface IModal {
+interface IModalDelete {
   open: boolean
   setOpen: (value: boolean) => void
   name: string
@@ -19,7 +20,7 @@ interface IModal {
   pic: string
 }
 
-const ModalDeleteProfile: React.FC<IModal> = ({
+const ModalDeleteProfile: React.FC<IModalDelete> = ({
   open,
   setOpen,
   name,
@@ -39,6 +40,7 @@ const ModalDeleteProfile: React.FC<IModal> = ({
           tourist_location: location,
           tourist_name: name,
           id: id,
+          token,
         }),
       )
       setOpen(false)

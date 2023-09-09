@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 
 import { addTouristList } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
+import { token } from 'src/utils/helper'
 
 interface IModal {
   open: boolean
@@ -36,6 +37,7 @@ const ModalAddProfile: FC<IModal> = ({ open, setOpen, setCurrent }) => {
             tourist_email: values.email,
             tourist_location: values.location,
             tourist_name: values.name,
+            token,
           }),
         )
         setOpen(false)

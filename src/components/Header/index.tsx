@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { LogoutOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import { token, userId } from 'src/utils/helper'
 
 import { logouts, getUser, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
@@ -12,8 +13,6 @@ export const Header: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const userData = useSelector(selectUser)
   const navigate = useNavigate()
-  const token = localStorage.getItem('token') || ''
-  const userId = localStorage.getItem('id') || ''
   const now = dayjs()
   const nowFormat = now.format('dddd, MMMM D YYYY')
 
@@ -26,12 +25,12 @@ export const Header: FC = () => {
   }
 
   const initFetch = useCallback(() => {
-    dispatch(getUser(userId))
-  }, [dispatch, userId])
+    dispatch(getUser({ id: userId, token }))
+  }, [dispatch])
 
   useEffect(() => {
     initFetch()
-  }, [initFetch, token])
+  }, [initFetch])
 
   return (
     <div className='text-left flex md:flex-row flex-col-reverse w-full'>

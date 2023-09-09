@@ -37,7 +37,6 @@ const POST = async (value: MethodValueTypes) => {
     return response.data
   } catch (error) {
     // throw error
-
   }
 }
 

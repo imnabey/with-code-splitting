@@ -15,12 +15,10 @@ import ModalAddProfile from './components/ModalAddProfile'
 const Homepage = () => {
   const [open, setOpen] = useState(false)
   const [current, setCurrent] = useState(1)
-
+  const token = localStorage.getItem('token') || ''
   const dispatch = useDispatch<AppDispatch>()
   const touristListData = useSelector(touristList)
   const totalTouristsData = useSelector(totalTourists)
-
-  // const token = localStorage.getItem('token') || ''
 
   const showModal = () => {
     setOpen(true)
@@ -31,8 +29,8 @@ const Homepage = () => {
   }
 
   const initFetch = useCallback(() => {
-    dispatch(getTouristList({ page: current }))
-  }, [dispatch, current])
+    dispatch(getTouristList({ page: current, token }))
+  }, [dispatch, current, token])
 
   useEffect(() => {
     initFetch()

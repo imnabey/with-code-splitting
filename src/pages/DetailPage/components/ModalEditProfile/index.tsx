@@ -6,8 +6,9 @@ import { toast } from 'react-toastify'
 
 import { editTourist, getTouristById } from 'src/store/touristSlice'
 import { AppDispatch } from 'src/store'
+import { token } from 'src/utils/helper'
 
-interface IModal {
+interface IModalEdit {
   open: boolean
   setOpen: (value: boolean) => void
   name: string
@@ -25,7 +26,7 @@ type FieldType = {
   location?: string
 }
 
-const ModalUpdateProfile: React.FC<IModal> = ({
+const ModalUpdateProfile: React.FC<IModalEdit> = ({
   open,
   setOpen,
   name,
@@ -48,9 +49,10 @@ const ModalUpdateProfile: React.FC<IModal> = ({
             tourist_location: values.location,
             tourist_name: values.name,
             id: id,
+            token,
           }),
         )
-        dispatch(getTouristById(id))
+        dispatch(getTouristById({ id, token }))
         toast.success('Data is successfully updated!', {
           position: toast.POSITION.TOP_CENTER,
         })

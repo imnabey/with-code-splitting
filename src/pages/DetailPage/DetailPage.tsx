@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, Link } from 'react-router-dom'
 import dayjs from 'dayjs'
-import { isEqual } from 'lodash'
+
 import { Button, Image } from 'antd'
 import {
   MailOutlined,
@@ -19,10 +19,10 @@ import {
   getTouristById,
   touristId,
 } from 'src/store/touristSlice'
+import { token } from 'src/utils/helper'
 import { AppDispatch } from 'src/store'
 
 import ProtectedLayout from 'src/components/layout/ProtectedLayout'
-import { usePrevious } from 'src/utils/hooks'
 
 import ModalUpdateProfile from './components/ModalEditProfile'
 import ModalDeleteProfile from './components/ModalDeleteProfile'
@@ -35,15 +35,14 @@ const DetailPage = () => {
   const touristByIdData = useSelector(touristId)
   const touristStatusData = useSelector(touristStatus)
   const location = useLocation()
-  const prevLocation = usePrevious(location.pathname)
-  // const token = localStorage.getItem('token') || ''
+
   const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
   const joinDate = dayjs(touristByIdData?.createdat)
   const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
 
   const initFetch = useCallback(() => {
-    dispatch(getTouristList({ page: 1 }))
-  }, [dispatch])
+    dispatch(getTouristList({ page: 1, token }))
+  }, [dispatch, token])
 
   const showModal = () => {
     setOpen(true)
@@ -58,10 +57,10 @@ const DetailPage = () => {
   }, [initFetch])
 
   useEffect(() => {
-    if (touristStatusData === 'idle' || !isEqual(prevLocation, location.pathname)) {
-      dispatch(getTouristById(detailId))
+    if (touristStatusData === 'idle') {
+      dispatch(getTouristById({ id: detailId, token }))
     }
-  }, [location.pathname, dispatch, detailId])
+  }, [dispatch, token, detailId])
 
   return (
     <ProtectedLayout>
@@ -172,20 +171,20 @@ const DetailPage = () => {
       <ModalUpdateProfile
         open={open}
         setOpen={setOpen}
-        name={touristByIdData.tourist_name}
-        email={touristByIdData.tourist_email}
-        location={touristByIdData.tourist_location}
-        id={touristByIdData.id}
-        pic={touristByIdData.tourist_profilepicture}
+        name={touristByIdData?.tourist_name}
+        email={touristByIdData?.tourist_email}
+        location={touristByIdData?.tourist_location}
+        id={touristByIdData?.id}
+        pic={touristByIdData?.tourist_profilepicture}
       />
       <ModalDeleteProfile
         open={openDelete}
         setOpen={setOpenDelete}
-        name={touristByIdData.tourist_name}
-        email={touristByIdData.tourist_email}
-        location={touristByIdData.tourist_location}
-        id={touristByIdData.id}
-        pic={touristByIdData.tourist_profilepicture}
+        name={touristByIdData?.tourist_name}
+        email={touristByIdData?.tourist_email}
+        location={touristByIdData?.tourist_location}
+        id={touristByIdData?.id}
+        pic={touristByIdData?.tourist_profilepicture}
       />
     </ProtectedLayout>
   )

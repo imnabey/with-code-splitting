@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store'
-import { loginAPI, registerAPI, logout, getUserAPI, tokenData } from 'src/services/api/userAPI'
+import { loginAPI, registerAPI, logout, getUserAPI, } from 'src/services/api/userAPI'
 
 const initialState = {
   isLoading: false,
@@ -41,15 +41,10 @@ export const logouts = createAsyncThunk("user/logout", () => {
   logout();
 });
 
-
-export const tokens = createAsyncThunk("user/token", () => {
-  tokenData();
-});
-
 export const getUser = createAsyncThunk(
   'user/getUser',
-  async (id: string) => {
-    const response = await getUserAPI(id)
+  async (data: { id: string, token: string }) => {
+    const response = await getUserAPI(data)
     return response
   },
 )
@@ -87,10 +82,6 @@ export const userSlice = createSlice({
           Token: ""
         };
       })
-      .addCase(tokens.fulfilled, (state) => {
-        state.isLoading = false;
-        state.isAuthenticated = true;
-      })
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
@@ -105,7 +96,7 @@ export const userSlice = createSlice({
 export const selectUser = (state: RootState) => state.users.currentUser;
 export const selectLoading = (state: RootState) => state.users.isLoading;
 export const selectErrorMessage = (state: RootState) => state.users.errorMessage;
-export const selecToken = (state: RootState) => state.users.tokenInit;
+
 export const isAuthenticated = (state: RootState) => state.users.isAuthenticated;
 
 export default userSlice.reducer;

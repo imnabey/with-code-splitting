@@ -13,8 +13,6 @@ import './App.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
-  const token = localStorage.getItem('token') || ''
-
   return (
     <ConfigProvider
       theme={{
@@ -46,7 +44,7 @@ function App() {
           <Route
             path='/detail/:detailId'
             element={
-              <ProtectedRoute token={token}>
+              <ProtectedRoute>
                 <DetailPage />
               </ProtectedRoute>
             }
@@ -54,7 +52,7 @@ function App() {
           <Route
             path='/'
             element={
-              <ProtectedRoute token={token}>
+              <ProtectedRoute>
                 <HomePage />
               </ProtectedRoute>
             }

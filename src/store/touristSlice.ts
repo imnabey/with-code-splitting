@@ -37,24 +37,23 @@ const initialState: TouristState = {
 
 export const getTouristList = createAsyncThunk(
   'tourist/getList',
-  async (data: { page: number }) => {
+  async (data: { page: number, token: string }) => {
     const response = await getTouristListAPI(data)
     return response
   },
 )
 
-
 export const getTouristById = createAsyncThunk(
   'tourist/getTouristId',
-  async (id: string) => {
-    const response = await getTouristByIdAPI(id)
+  async (data: { id: string, token: string }) => {
+    const response = await getTouristByIdAPI(data)
     return response
   },
 )
 
 export const addTouristList = createAsyncThunk(
   'tourist/addList',
-  async (data: { tourist_name: string, tourist_location: string, tourist_email: string }) => {
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, token: string }) => {
     const response = await addTouristAPI(data)
     return response
   }
@@ -62,7 +61,7 @@ export const addTouristList = createAsyncThunk(
 
 export const deleteTourist = createAsyncThunk(
   'tourist/deleteTourist',
-  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string }) => {
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string, token: string }) => {
     const response = await deleteTouristAPI(data)
     return response
   }
@@ -70,7 +69,7 @@ export const deleteTourist = createAsyncThunk(
 
 export const editTourist = createAsyncThunk(
   'tourist/editTourist',
-  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string }) => {
+  async (data: { tourist_name: string, tourist_location: string, tourist_email: string, id: string, token: string }) => {
     const response = await updateTouristAPI(data)
     return response
   }

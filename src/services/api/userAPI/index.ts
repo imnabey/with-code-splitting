@@ -2,9 +2,7 @@
 import qs from 'qs'
 
 import { POST, GET } from 'src/services/http'
-import { END_POINT } from 'src/constant'
-
-const token = localStorage.getItem('token') || "";
+import { END_POINT } from 'src/utils/constant'
 
 const loginAPI = (data: { email: string, password: string }) => {
   const param = {
@@ -28,11 +26,11 @@ const registerAPI = (data: { email: string, password: string }) => {
   return POST(param)
 }
 
-const getUserAPI = (id: string) => {
+const getUserAPI = (data: { id: string, token: string }) => {
   const param = {
-    url: `${END_POINT}/api/users/${id}`,
+    url: `${END_POINT}/api/users/${data.id}`,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${data.token}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   }
@@ -44,8 +42,4 @@ const logout = () => {
   localStorage.removeItem("id");
 };
 
-const tokenData = () => {
-  token
-};
-
-export { loginAPI, registerAPI, logout, getUserAPI, tokenData }
+export { loginAPI, registerAPI, logout, getUserAPI, }
