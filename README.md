@@ -63,5 +63,16 @@ Deploy this project is using `netlify`.
 - Delete tourist
 - View all tourists
 
+## Performace Report
+
+<img width="1435" alt="Screen Shot 2023-09-10 at 00 23 51" src="https://github.com/imnabey/datacaktra-test/assets/40421876/0db86f47-3584-4e6d-b4b0-ac952fc0b861">
+
+## Website view
+<img width="1439" alt="Screen Shot 2023-09-10 at 00 31 29" src="https://github.com/imnabey/datacaktra-test/assets/40421876/e18b1ca3-0469-46bf-80bf-842f6d0ced6f">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 31 50" src="https://github.com/imnabey/datacaktra-test/assets/40421876/3b97db33-15f1-4b6b-8bd3-d8e3f37a0e9a">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 32 39" src="https://github.com/imnabey/datacaktra-test/assets/40421876/ec601337-f258-4eb6-baa3-e5942f5ed0bf">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 33 00" src="https://github.com/imnabey/datacaktra-test/assets/40421876/36548e67-90ff-4cb6-8cb9-82f11cbcfbc2">
+<img width="1439" alt="Screen Shot 2023-09-10 at 00 32 50" src="https://github.com/imnabey/datacaktra-test/assets/40421876/dbfa9419-8e15-445b-b65d-5375cd3f35f7">
+<img width="1440" alt="Screen Shot 2023-09-10 at 00 33 04" src="https://github.com/imnabey/datacaktra-test/assets/40421876/db984f9b-cff5-456f-87bc-9583f2858270">
 
 
