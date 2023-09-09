@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd'
 import clsx from 'clsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { login, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
@@ -29,6 +30,13 @@ const Login: React.FC = () => {
 
     if (datalogin.Token) {
       navigate(urlFrom, { replace: true })
+      toast.success('Successfully login!', {
+        position: toast.POSITION.TOP_CENTER,
+      })
+    } else {
+      toast.error('Login is failed!', {
+        position: toast.POSITION.TOP_CENTER,
+      })
     }
   }
 
@@ -43,13 +51,7 @@ const Login: React.FC = () => {
             <img src={LoginGlass} alt='icon-glassess' className='h-12 mb-4' />
             <div className='text-4xl font-bold mb-3'>Welcome Back!</div>
             <div className='mb-12 text-gray-medium text-lg'>Please enter your details</div>
-            <Form
-              name='basic'
-              layout='vertical'
-              // initialValues={{ remember: true }}
-              onFinish={onFinish}
-              autoComplete='off'
-            >
+            <Form name='basic' layout='vertical' onFinish={onFinish} autoComplete='off'>
               <Form.Item<FieldType>
                 label={<div className='text-lg font-semibold'>Email</div>}
                 name='email'

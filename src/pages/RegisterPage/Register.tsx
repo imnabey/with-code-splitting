@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd'
 import { useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import clsx from 'clsx'
+import { toast } from 'react-toastify'
 
 import { register } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
@@ -25,6 +26,9 @@ const Register: React.FC = () => {
   const onFinish = async (values: { email: string; password: string; name: string }) => {
     await dispatch(register({ email: values.email, password: values.password, name: values.name }))
     navigate('/login')
+    toast.success('Successfully register!', {
+      position: toast.POSITION.TOP_CENTER,
+    })
   }
 
   return (
