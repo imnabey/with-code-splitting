@@ -44,4 +44,8 @@ const logout = () => {
   localStorage.removeItem("id");
 };
 
-export { loginAPI, registerAPI, logout, getUserAPI }
+const tokenData = () => {
+  token
+};
+
+export { loginAPI, registerAPI, logout, getUserAPI, tokenData }

@@ -34,12 +34,6 @@ const Login: React.FC = () => {
     navigate(urlFrom, { replace: true })
   }
 
-  // if (user.name) {
-  //   console.log(user.name,"kkkkk")
-  //   return
-  // <Navigate replace to={urlFrom} />
-  // }
-
   return (
     <MainLayout>
       <div className='md:flex w-full block'>

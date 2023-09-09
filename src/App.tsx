@@ -12,7 +12,6 @@ import { ProtectedRoute } from 'src/routes/ProtectedRoute'
 
 function App() {
   const token = localStorage.getItem('token') || ''
-  console.log(token, 'token')
 
   return (
     <ConfigProvider
@@ -41,10 +40,23 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-          <Route element={<ProtectedRoute token={token} />}>
-            <Route path='/detail/:detailId' element={<DetailPage />} />
-            <Route path='/' element={<HomePage />} errorElement={<ErrorPage />} />
-          </Route>
+          <Route
+            path='/detail/:detailId'
+            element={
+              <ProtectedRoute token={token}>
+                <DetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute token={token}>
+                <HomePage />
+              </ProtectedRoute>
+            }
+            errorElement={<ErrorPage />}
+          />
 
           <Route path='/login' element={<Login />} errorElement={<ErrorPage />} />
           <Route path='/register' element={<RegisterPage />} errorElement={<ErrorPage />} />

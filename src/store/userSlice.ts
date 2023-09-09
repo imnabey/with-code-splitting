@@ -1,18 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from 'src/store'
-import { loginAPI, registerAPI, logout, getUserAPI } from 'src/services/api/userAPI'
+import { loginAPI, registerAPI, logout, getUserAPI, tokenData } from 'src/services/api/userAPI'
 
 const initialState = {
   isLoading: false,
   errorMessage: '',
+  isAuthenticated: false,
+  tokenInit: "",
   currentUser: {
     name: "",
     email: "",
     avatar: ""
   },
 };
-const token = localStorage.getItem('token') || "";
-console.log(token, "tokenn KK")
+// const token = localStorage.getItem('token') || "";
+// console.log(token, "tokenn KK")
 
 export const login = createAsyncThunk(
   'user/login',
@@ -40,6 +42,11 @@ export const logouts = createAsyncThunk("user/logout", () => {
   logout();
 });
 
+
+export const tokens = createAsyncThunk("user/token", () => {
+  tokenData();
+});
+
 export const getUser = createAsyncThunk(
   'user/getUser',
   async (id: string) => {
@@ -60,6 +67,7 @@ export const userSlice = createSlice({
     })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isAuthenticated = true;
         state.currentUser = action.payload;
       })
       .addCase(login.rejected, (state) => {
@@ -79,14 +87,17 @@ export const userSlice = createSlice({
           avatar: ""
         };
       })
+      .addCase(tokens.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isAuthenticated = true;
+      })
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.isAuthenticated = true;
+        state.isAuthenticated = true;
         state.currentUser = action.payload;
       })
       .addCase(register.rejected, (state) => {
         state.isLoading = false;
-
       });
   },
 });
@@ -94,5 +105,7 @@ export const userSlice = createSlice({
 export const selectUser = (state: RootState) => state.users.currentUser;
 export const selectLoading = (state: RootState) => state.users.isLoading;
 export const selectErrorMessage = (state: RootState) => state.users.errorMessage;
+export const selecToken = (state: RootState) => state.users.tokenInit;
+export const isAuthenticated = (state: RootState) => state.users.isAuthenticated;
 
 export default userSlice.reducer;

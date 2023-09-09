@@ -4,7 +4,6 @@ import { GET, POST, DELETE, PUT } from 'src/services/http'
 import { END_POINT } from 'src/constant'
 
 const token = localStorage.getItem('token') || "";
-// console.log(token, "tokenn API")
 
 const headerJson = {
   Authorization: `Bearer ${token}`,
@@ -16,11 +15,11 @@ const headerXWwwForm = {
   'Content-Type': 'application/x-www-form-urlencoded',
 }
 
-const getTouristListAPI = (data: { page: number, token: string }) => {
+const getTouristListAPI = (data: { page: number }) => {
   const param = {
     url: `${END_POINT}/api/Tourist?page=${data.page}`,
     headers: {
-      Authorization: `Bearer ${data.token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   }
@@ -38,7 +37,6 @@ const getTouristByIdAPI = (id: string) => {
 }
 
 const addTouristAPI = (data: { tourist_name: string, tourist_email: string, tourist_location: string }) => {
-  // console.log(data, "data")
   const param = {
     url: `${END_POINT}/api/Tourist`,
     headers: {

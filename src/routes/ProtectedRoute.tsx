@@ -1,11 +1,17 @@
-import { Navigate, useLocation, Outlet } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
-export const ProtectedRoute = ({ token }: { token: string }) => {
+export const ProtectedRoute = ({
+  token,
+  children,
+}: {
+  token: string
+  children: React.ReactNode
+}) => {
   const location = useLocation()
 
   if (!token) {
-    return <Navigate replace to='/login' state={{ from: location.pathname }} />
+    return <Navigate replace to='/login' state={{ from: location }} />
   } else {
-    return <Outlet />
+    return children
   }
 }

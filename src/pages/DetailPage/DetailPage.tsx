@@ -38,11 +38,11 @@ const DetailPage = () => {
   const prevLocation = usePrevious(location.pathname)
   const token = localStorage.getItem('token') || ''
   const detailId = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-  const joinDate = dayjs(touristByIdData.createdat)
+  const joinDate = dayjs(touristByIdData?.createdat)
   const convertJoinDate = joinDate.format('dddd, MMMM D YYYY')
-
+  console.log(token, 'token')
   const initFetch = useCallback(() => {
-    dispatch(getTouristList({ page: 1, token }))
+    dispatch(getTouristList({ page: 1 }))
   }, [dispatch, token])
 
   const showModal = () => {
@@ -70,7 +70,7 @@ const DetailPage = () => {
           <div className='md:flex w-full mb-16'>
             <div className='md:w-[20%] md:mb-0 mb-5'>
               <Image
-                src={touristByIdData.tourist_profilepicture}
+                src={touristByIdData?.tourist_profilepicture}
                 className='rounded-full mb-10'
                 width={150}
                 height={150}
@@ -79,15 +79,15 @@ const DetailPage = () => {
 
             <div className='text-left md:w-[70%]'>
               <div className='text-3xl font-bold text-gray mb-2'>
-                {touristByIdData.tourist_name}
+                {touristByIdData?.tourist_name}
               </div>
               <div className='text-lg text-gray-medium '>
                 <StarOutlined className='mr-2' />
-                {touristByIdData.id}
+                {touristByIdData?.id}
               </div>
               <div className='text-lg text-gray-medium flex items-center'>
                 <MailOutlined className='mr-2' />
-                {touristByIdData.tourist_email}
+                {touristByIdData?.tourist_email}
               </div>
               <div className='text-lg text-gray-medium'>
                 <ClockCircleOutlined className='mr-2' />
@@ -96,7 +96,7 @@ const DetailPage = () => {
               </div>
               <div className='text-lg text-gray-medium mb-4'>
                 <EnvironmentOutlined className='mr-2' />
-                {touristByIdData.tourist_location}
+                {touristByIdData?.tourist_location}
               </div>
               <div className='flex items-center'>
                 {' '}
@@ -122,9 +122,9 @@ const DetailPage = () => {
             You can find more tourists here!
           </div>
           <div className='bg-gray-light px-10 py-5 mb-10 md:mb-0 shadow-md rounded-3xl'>
-            {touristListData.map((item: any, index: any) => (
-              <Link to={`/detail/${item.id}`}>
-                <div className='w-full p-2 mb-2 rounded-3xl relative' key={index}>
+            {touristListData?.map((item: any, index: any) => (
+              <Link to={`/detail/${item.id}`} key={index}>
+                <div className='w-full p-2 mb-2 rounded-3xl relative'>
                   <div className='flex items-center'>
                     <img
                       src={item.tourist_profilepicture}
@@ -154,9 +154,9 @@ const DetailPage = () => {
             <div className='text-left text-md text-gray-medium mb-8'>
               Another tourists are here!
             </div>
-            {touristListData.slice(0, 8).map((item: any, index: any) => (
-              <Link to={`/detail/${item.id}`}>
-                <div className=' w-full p-2 mb-2 rounded-3xl relative' key={index}>
+            {touristListData?.slice(0, 8).map((item: any, index: any) => (
+              <Link to={`/detail/${item.id}`} key={index}>
+                <div className=' w-full p-2 mb-2 rounded-3xl relative'>
                   <div className='text-left'>
                     <div className='text-lg text-gray font-semibold'>{item.tourist_name}</div>
                     <div className='text-sm text-gray-medium'> {item.tourist_location}</div>

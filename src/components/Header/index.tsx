@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logouts, getUser, selectUser } from 'src/store/userSlice'
 import { AppDispatch } from 'src/store'
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const userData = useSelector(selectUser)
   const navigate = useNavigate()
@@ -39,12 +39,12 @@ const Header: FC = () => {
       <div className='md:w-[20%] justify-end flex md:mb-0 mb-10'>
         <div className='flex rounded-lg mr-5 py-2 items-center w-full'>
           <div className='w-[20%] mr-2'>
-            <img src={userData.avatar} className='rounded-full h-[42px] w-[42px]' />
+            <img src={userData?.avatar} className='rounded-full h-[42px] w-[42px]' />
           </div>
 
           <div className='w-[80%] '>
-            <div className='text-md font-semibold'>{userData.name}</div>
-            <div className='text-gray-medium'>{userData.email}</div>
+            <div className='text-md font-semibold'>{userData?.name}</div>
+            <div className='text-gray-medium'>{userData?.email}</div>
           </div>
         </div>
 
@@ -57,6 +57,7 @@ const Header: FC = () => {
             className='absolute z-10 right-[-18px] top-[15px]'
           />
         </div>
+        {/* </Link> */}
       </div>
     </div>
   )

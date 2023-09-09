@@ -31,8 +31,8 @@ const Homepage = () => {
   }
 
   const initFetch = useCallback(() => {
-    dispatch(getTouristList({ page: current, token }))
-  }, [dispatch, current, token])
+    dispatch(getTouristList({ page: current }))
+  }, [dispatch, current])
 
   useEffect(() => {
     initFetch()

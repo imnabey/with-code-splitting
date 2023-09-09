@@ -37,14 +37,14 @@ const initialState: TouristState = {
 
 export const getTouristList = createAsyncThunk(
   'tourist/getList',
-  async (data: { page: number, token: string }) => {
+  async (data: { page: number }) => {
     const response = await getTouristListAPI(data)
     return response
   },
 )
 
-const token = localStorage.getItem('token') || "";
-console.log(token, "tokenn KK")
+// const token = localStorage.getItem('token') || "";
+// console.log(token, "tokenn KK")
 
 export const getTouristById = createAsyncThunk(
   'tourist/getTouristId',
@@ -109,7 +109,6 @@ export const touristSlice = createSlice({
       .addCase(getTouristList.rejected, (state) => {
         state.status = 'failed'
       })
-
   },
 })
 
