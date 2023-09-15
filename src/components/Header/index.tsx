@@ -3,7 +3,7 @@ import Lazyload from 'src/components/LazyLoad'
 
 const HeaderLazy = React.lazy(() => import('./Header'))
 
-const Header = (props) => {
+const Header = (props: any) => {
   return <Lazyload component={HeaderLazy} {...props} />
 }
 

@@ -3,7 +3,7 @@ import Lazyload from 'src/components/LazyLoad'
 
 const SideBarLazy = React.lazy(() => import('./SideBar'))
 
-const SideBar = (props) => {
+const SideBar = (props: any) => {
   return <Lazyload component={SideBarLazy} {...props} />
 }
 
