@@ -1,35 +1,10 @@
-import { FC } from 'react'
-import { Link } from 'react-router-dom'
-import { Menu, Layout } from 'antd'
+import React from 'react'
+import Lazyload from 'src/components/LazyLoad'
 
-import WhiteGlass from 'src/assets/img/white-glasses.svg'
+const SideBarLazy = React.lazy(() => import('./SideBar'))
 
-const { Sider } = Layout
-
-const Sidebar: FC = () => {
-  return (
-    <Sider
-      breakpoint='lg'
-      style={{ background: '#1f2026' }}
-      className='h-auto hidden md:block'
-      collapsed={true}
-    >
-      <div className='py-10'>
-        <Link to='/'>
-          <img src={WhiteGlass} alt={'icon-white-glasses'} className='h-10' />
-        </Link>
-
-        <div className='h-[50vh] flex items-center justify-center'>
-          <Menu
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            mode='vertical'
-            className='w-full'
-          />
-        </div>
-      </div>
-    </Sider>
-  )
+const SideBar = (props) => {
+  return <Lazyload component={SideBarLazy} {...props} />
 }
 
-export default Sidebar
+export default SideBar

@@ -1,9 +1,10 @@
-import { FC } from 'react'
-import { Pagination } from 'antd'
-import { IPagination } from 'types'
+import React from 'react'
+import Lazyload from 'src/components/LazyLoad'
 
-const PaginationComponent: FC<IPagination> = ({ current, onChange, totalData }) => {
-  return <Pagination current={current} onChange={onChange} total={totalData} />
+const PaginationLazy = React.lazy(() => import('./Pagination'))
+
+const Pagination = (props) => {
+  return <Lazyload component={PaginationLazy} {...props} />
 }
 
-export default PaginationComponent
+export default Pagination
