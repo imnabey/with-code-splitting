@@ -73,3 +73,4 @@ Deploy this project is using `netlify`. url: https://biro-perjalanan-nabilah.net
 <img width="1440" alt="Screen Shot 2023-09-10 at 00 32 39" src="https://github.com/imnabey/datacaktra-test/assets/40421876/f1910d3e-bb62-41c5-bbd5-ffa6239e0e0d">
 <img width="1440" alt="Screen Shot 2023-09-10 at 00 31 50" src="https://github.com/imnabey/datacaktra-test/assets/40421876/095408b9-ce66-4b51-acae-d1ae373d192b">
 <img width="1440" alt="Screen Shot 2023-09-10 at 00 33 04" src="https://github.com/imnabey/datacaktra-test/assets/40421876/96bd6f26-2afe-4dd5-a74b-02cbce6cb2a3">
+# with-code-splitting
